@@ -33,7 +33,8 @@ warning comment, and gitignore it or commit it clearly labelled.
 
   "compound": "学校",            // kanji as written
   "reading": "がっこう",          // primary reading, hiragana
-  "char_count": 2,              // number of kanji in `compound`
+  "char_count": 2,              // number of kanji in `compound` (kanji only, §7.1)
+  "has_kana": false,            // true when `compound` contains kana as written (真っ赤, 気持ち)
 
   "classification": "on_on",    // enum, §3
   "decomposable": true,         // false for jukujikun
@@ -65,7 +66,7 @@ One object per kanji in `compound`, in order.
 ```jsonc
 {
   "kanji": "学",                    // exactly one character
-  "reading_in_compound": "がっ",     // null for jukujikun components
+  "reading_in_compound": "がっ",     // may be null on jukujikun components, see below
   "reading_type": "on",             // "on" | "kun" | "neither"
   "on_readings": ["ガク"],           // katakana, dictionary forms, may be []
   "kun_readings": ["まなぶ"],        // hiragana, dictionary forms, may be []
@@ -78,6 +79,11 @@ in this compound. An empty array is meaningful: 畑 is a 国字 with no on readi
 茶 was imported with its concept and has no standard kun reading. Those empties
 are the reason 茶畑 can only be 重箱, which is a real prediction tool. Do not
 "fix" empty arrays by filling them.
+
+`reading_in_compound` on 熟字訓 components **may** be null or may carry the
+source's split of the whole-word reading across the characters (大人 → おと +
+な). Preserve whatever the source has; do not null it and do not invent a split.
+The prototype's `—` maps to null.
 
 `reading_type` is `"neither"` only for components of a 熟字訓, where the reading
 attaches to the whole word and no per-character assignment is honest. **This is
@@ -92,7 +98,8 @@ would collide conceptually with the retired `irregular` classification (§3).
   "reading": "まいげつ",
   "classification": "on_on",        // may differ from the primary!
   "context": "More formal. Written and business contexts.",
-  "status": "standard"              // enum, §7.3
+  "status": "standard",             // enum, §7.3, mapped from source_status
+  "source_status": "standard"       // the source's free-text status, verbatim, §7.3
 }
 ```
 
@@ -123,8 +130,29 @@ counts two entries under "Irregular/3-char." **Do not carry `irregular` into the
 canonical enum.** During consolidation, classify each such entry explicitly and
 record the decision in the migration report. If an entry genuinely resists all
 five categories, tag it `unclassifiable` in `tags[]`, set `classification` to
-the closest fit, and flag it for Dan. Two entries is a small enough number to
-handle by hand.
+the closest fit, and flag it for Dan.
+
+The source holds **four** entries outside the five categories (audited
+2026-09-06: three `irregular`, one `n/a`), and consolidation handles them exactly
+so:
+
+- **真っ赤** (source reading types: 真 まっ kun, 赤 か on) — `classification`
+  is set to the value the source's own reading types derive to (`yutou`),
+  `tags` gains `unclassifiable`, and the entry is flagged in
+  `reports/02-flagged.md` with the source reading types shown. か is not a
+  dictionary on reading of 赤 (セキ, シャク), which is the reason the entry
+  resists.
+- **真っ青** (source: 真 まっ kun, 青 さお kun) — derives to `kun_kun`, tagged
+  `unclassifiable`, flagged.
+- **朝寝坊** (`char_count: 3`; source: 朝 あさ kun, 寝 ね kun, 坊 ぼう on) —
+  `classification` is the two-character derivation applied to the first two
+  characters (`kun_kun`), tagged `unclassifiable`, flagged.
+- **峠** (source `n/a`; a single kanji, 国字) is **kept, not dropped**:
+  `char_count: 1`, `classification: "kun_kun"` as the closest fit, tags
+  `kokuji` and `unclassifiable`, excluded from derivation by the `char_count`
+  rule below, flagged.
+
+Drills in Phase 1 exclude entries tagged `unclassifiable`.
 
 Three-character compounds (一段落 and similar) get `char_count: 3` and an
 asserted classification. Derivation (§7.2) applies only when `char_count === 2`.
@@ -145,7 +173,8 @@ exactly one canonical entry.
 | — | `source_batch` | from filename |
 | `compound` | `compound` | verbatim |
 | `reading` | `reading` | verbatim, normalize to NFC |
-| — | `char_count` | count kanji in `compound` |
+| — | `char_count` | count kanji in `compound` (kanji only, §7.1) |
+| — | `has_kana` | true iff `compound` contains any kana |
 | `classification` | `classification` | map `irregular` per §3 |
 | — | `decomposable` | `classification !== "jukujikun"` |
 | `characters[]` | `characters[]` | field names identical; `reading_type` values `on`/`kun`/`neither` pass through unchanged |
@@ -199,8 +228,11 @@ Source IDs are unusable as canonical IDs for two reasons, both confirmed:
    湯桶; 台風 is `juubako_25` but classifies as 音音; 夕暮れ is `yutou_24` but
    classifies as 訓訓. Anyone — human or machine — who reads meaning into the
    prefix will be wrong.
-2. Numbering restarted across batches. Batch 3 reached `juubako_86`; batch 4
-   opens at `juubako_25`. Collisions are near-certain.
+2. Numbering restarted across batches (batch 3's highest `juubako_` number is
+   24; batch 4 opens at `juubako_25`), yet the audit found **0 duplicate IDs
+   across the 168 entries** (`reports/00-audit.md` §2.1). Canonical IDs are
+   still reassigned because 45 of 168 prefixes contradict the entry's
+   classification (audit §2.2).
 
 Canonical IDs are therefore **opaque and sequential**: `cr_0001` through
 `cr_NNNN`, assigned in a deterministic order (source batch, then source file
@@ -313,8 +345,12 @@ pedagogically valuable — the pattern is fully learnable in one sitting. If
 validation finds a fifth, that is interesting and should be reported, not
 silently accepted.
 
-連濁 is the largest cluster (~30 entries); 促音 has around six (学校, 早速, 約款,
-切手, 物質 and others).
+連濁 is the largest cluster: 24 entries carry the token (audited 2026-09-06).
+促音 has 9: 学校, 早速, 約款, 切手, 物質, 真っ赤, 真っ白, 真っ黒, 真っ青.
+
+The four 半濁音化 entries (散歩, 年俸, 心配, 乾杯) arrive from source under the
+token `other` with 半濁音化 named only in `phonetic_change_detail`; consolidation
+promotes them to `handakuon` and lists the promotion in the migration report.
 
 Note the edge case in 勝負 (しょうぶ): 負 フ → ぶ is voicing between two *on*
 readings, which is arguably not 連濁 in the strict sense. The source entry
@@ -333,9 +369,14 @@ discusses this in a `reading_note` while leaving `phonetic_changes` empty. Use
 - `id` unique across the dataset
 - `source_id` + `source_batch` unique in combination
 - `characters.length === char_count`
-- `char_count` equals the count of kanji in `compound`
+- `char_count` equals the count of kanji in `compound` — **kanji only**; kana
+  inside the compound are not counted
 - Each `characters[].kanji` is exactly one character, and concatenating them
-  equals `compound`
+  equals `compound` **with its kana removed**. The concatenation rule and
+  `char_count` compare kanji only. `compound` keeps its kana as written
+  (気持ち, 揚げ物, 追い風, 真っ赤, 真っ白, 真っ黒, 真っ青, 枠組み, 夕暮れ, 音読み,
+  訓読み), and `has_kana` is true on exactly the entries whose `compound`
+  contains kana
 - `reading` is hiragana only
 - `on_readings` entries are katakana; `kun_readings` entries are hiragana
 - `difficulty` is an integer 1–4
@@ -378,6 +419,22 @@ Exceptions, checked separately:
 | `disputed` | Native speakers actively disagree |
 | `nonstandard` | Common error; recorded to be recognized, not accepted |
 
+The source batches carry `status` as free text (14 distinct strings, audited
+2026-09-06), not this enum. Each alternate therefore also carries
+`source_status: string`, the source's text verbatim, and `status` is mapped from
+it by this rule table, applied in order, first match wins:
+
+| Source string | → `status` |
+|---|---|
+| begins with "standard" | `standard` |
+| contains "NHC changed", "NHK changed", "increasingly accepted", or "permit" | `variant_accepted` |
+| contains "widespread but contested" or "originally non-standard" | `variant_spreading` |
+| contains "domain-specific" | `standard` |
+| anything unmatched | `disputed` **and** a row in the migration report |
+
+Every distinct source string and the enum it mapped to is a row in
+`reports/01-migration.md`.
+
 WARN if `alternate_readings[].classification` differs from the entry's
 `classification` and no `trap_note` mentions it — a classification-changing
 alternate is exactly the kind of thing the entry should be teaching.
@@ -408,6 +465,17 @@ If a character's `reading_in_compound` appears in neither its `on_readings` nor
 its `kun_readings` (after kana normalization), the entry should list a phonetic
 change. An empty `phonetic_changes` in that situation is a WARN. This catches
 勝負-type omissions.
+
+**Stem rule.** A `reading_in_compound` matches a kun reading if it equals it
+**or** equals that reading with its trailing okurigana removed — the 連用形 stem
+of a verb recorded in dictionary form: 消印 けし ← けす, 続柄 つづき ← つづく,
+受付 つけ ← つける, 音読み よみ ← よむ. Concretely, for a kun reading ending in
+る whose preceding kana is in the i- or e-row, the stem is the reading without
+る (つける → つけ); for any other kun reading ending in a u-row kana, the stem
+is the reading with that final kana shifted to the i-row (けす → けし, つづく →
+つづき, よむ → よみ). Nothing else is matched: あら does not match あらた, so
+新手 stays flagged. After the stem rule the omission check flags 勝負 and 新手
+only; if it flags more, the validator lists them and the rule is not widened.
 
 Conversely, a listed phonetic change with a `reading_in_compound` that exactly
 matches a dictionary reading is also a WARN.
@@ -446,9 +514,17 @@ in `scripts/anchors.json`:
   { "compound": "場所", "reading": "ばしょ", "classification": "yutou",
     "asserted_in": "CLAUDE.md §2", "note": "signature trap" },
   { "compound": "手本", "reading": "てほん", "classification": "yutou",
-    "asserted_in": "CLAUDE.md §5", "note": "手 chain" }
+    "asserted_in": "CLAUDE.md §5", "note": "手 chain" },
+  { "compound": "夕食", "reading": "ゆうしょく", "classification": "yutou",
+    "asserted_in": "CLAUDE.md §5", "note": "夕 chain; the prototype's 重箱 and its trap text are wrong" },
+  { "compound": "夕飯", "reading": "ゆうはん", "classification": "yutou",
+    "asserted_in": "CLAUDE.md §5", "note": "夕 chain; the prototype's 重箱 is wrong" }
 ]
 ```
+
+The 夕食 and 夕飯 fixtures exist because the prototype records both as 重箱 and
+its 夕食 trap text says so too; the source (batch 3) records both as 湯桶 with 夕
+= ゆう kun, and the source is right.
 
 `validate.ts` checks every fixture against `data/compounds.json` and **fails the
 build on any mismatch**.

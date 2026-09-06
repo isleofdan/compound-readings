@@ -114,7 +114,8 @@ notes in the verbose entries — and write it into the canonical `chains[]` fiel
 This is the messiest task in Phase 0. Trap notes state chain membership in
 English prose ("目 chain: め(kun) in 目印/目玉/目安..."), so extraction is
 partly manual. Produce a proposed chain assignment for Dan's review rather than
-committing it blind. Chains named in `CLAUDE.md` §5 must all survive.
+committing it blind. Chains named in `CLAUDE.md` §5 must all survive. Chain
+review happens in Dan's study project; this repo commits the proposal.
 
 **0.6 — Validation script.** `scripts/validate.ts` implements `DATA_SPEC.md` §7.
 At minimum: duplicate IDs, schema violations, missing required fields, and
@@ -182,6 +183,9 @@ changes, and the trap note. Reveal must explain *why*, not just mark correct.
 **Prediction Challenge.** Given a compound plus a classification hint, predict
 the reading. Grading must accept documented alternate readings — see the honest
 assessment below on why this mode is harder than it looks.
+
+Drills in Phase 1 exclude entries tagged `unclassifiable` (真っ赤, 真っ青,
+朝寝坊, 峠 — `DATA_SPEC.md` §3).
 
 ### Tasks
 
