@@ -44,7 +44,7 @@ Recovery target:
 | `compound_readings_batch4.json` | Batch 4, 49 entries (IDs described as "entries 127–175") | [T] |
 | `compound_readings_index.md` | Cross-reference index | [T] |
 | `compound_readings_analysis.md` | Architecture + interaction model + honest assessment | [U] |
-| Prototype `.jsx` | ~45 embedded compact entries, three modes | [U] on count |
+| Prototype `.jsx` | Located and installed at `data/source/compound-drill.prototype.jsx`; 43 embedded compact entries (computed from the file, 2026-09-06), three modes | [V] |
 
 **Index coverage — answered.** The index covers batches 1–3 only. Its own entry
 count table stops at Batch 3 and totals 126; it was written before batch 4
@@ -221,7 +221,9 @@ Now that localStorage is available, make sessions accumulate.
 
 2.1 — Typed localStorage wrapper with versioned keys and a migration path.
 Corrupt or unreadable stored state must degrade to a fresh start, never a white
-screen.
+screen. Keys are namespaced by user identifier per `CLAUDE.md` §1 and
+`DATA_SPEC.md` §9. A single locally generated identifier is created on first run
+and stored; it is not a login.
 2.2 — Per-entry accuracy tracking: attempts, correct, last seen, per mode.
 2.3 — Difficulty-weighted selection: recently-missed and never-seen entries
 surface more often; reliably-correct entries recede. Weighting must be

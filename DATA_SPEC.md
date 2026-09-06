@@ -484,3 +484,7 @@ than no tag.
 Bump minor for additive fields, major for anything that breaks a consumer.
 The localStorage wrapper stores the schema version alongside progress data; on
 mismatch it migrates or resets rather than reading stale shapes.
+
+Progress data in `localStorage` is stored under a key that includes a user
+identifier (`cr:<userId>:progress:v<schema>`), and exported progress JSON carries
+that `userId`; the dataset itself is shared and carries no user key.
