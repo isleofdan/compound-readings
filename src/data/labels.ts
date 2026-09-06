@@ -103,6 +103,8 @@ export const UI_LABELS = {
 export const DRILL_LABELS = {
   drillTitle: "分類ドリル",
   predictTitle: "読み予想",
+  drillTabHint: "ドリル",
+  predictTabHint: "読み",
   correct: "正解",
   correctVariant: "別読みで正解",
   wrong: "不正解",

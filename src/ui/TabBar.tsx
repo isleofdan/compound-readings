@@ -1,12 +1,14 @@
-import type { Route } from "../router";
+import { DRILL_LABELS } from "../data/labels";
+import { NO_FILTERS, type Route } from "../router";
 
 // Bottom tab bar (BUILD_PLAN.md 1.5): fixed at the bottom, one-handed reach.
-// Two tabs now; the drill and predict tabs drop into TABS next session with no
-// layout change — every tab is flex-1 and the bar has no fixed column count.
+// Four tabs, every one flex-1; the bar has no fixed column count.
 export type TabKey = Route["tab"];
 
 const TABS: { key: TabKey; label: string; hint: string; route: Route }[] = [
   { key: "chains", label: "鎖", hint: "Chains", route: { tab: "chains", chain: null } },
+  { key: "drill", label: "分類", hint: DRILL_LABELS.drillTabHint, route: { tab: "drill", ...NO_FILTERS } },
+  { key: "predict", label: "予想", hint: DRILL_LABELS.predictTabHint, route: { tab: "predict", ...NO_FILTERS } },
   { key: "browse", label: "検索", hint: "Browse", route: { tab: "browse", q: "", cls: null, pc: null, open: null } },
 ];
 

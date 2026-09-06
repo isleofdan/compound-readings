@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Browse } from "./modes/Browse";
 import { ChainExplorer, EMPTY_REVEAL_STATE, type RevealState } from "./modes/ChainExplorer";
+import { ClassificationDrill } from "./modes/ClassificationDrill";
+import { PredictionChallenge } from "./modes/PredictionChallenge";
 import { useRoute } from "./router";
 import { TabBar } from "./ui/TabBar";
 
@@ -17,6 +19,10 @@ export default function App() {
       <main className="mx-auto max-w-md pb-40">
         {route.tab === "browse" ? (
           <Browse route={route} navigate={navigate} />
+        ) : route.tab === "drill" ? (
+          <ClassificationDrill route={route} navigate={navigate} />
+        ) : route.tab === "predict" ? (
+          <PredictionChallenge route={route} navigate={navigate} />
         ) : (
           <ChainExplorer route={route} navigate={navigate} state={reveal} setState={setReveal} />
         )}

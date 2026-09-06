@@ -4,14 +4,24 @@
 //   #/chains/手         one chain
 //   #/browse            Browse (the Session 2 inspection page)
 //   #/browse?q=場&cls=yutou&pc=rendaku&open=cr_0027
-// Only the URL is stored; in-memory state (which cards are revealed) is not.
+//   #/drill             Classification Drill; filters as ?cls=yutou&diff=3&pc=rendaku
+//   #/predict           Prediction Challenge; the same filter keys
+// Only the URL is stored; in-memory state (which cards are revealed, the
+// drill's current item and tally) is not — the drill item is random, so only
+// its filters are addressable (Session 4 brief §5 rule 7).
 import { useCallback, useSyncExternalStore } from "react";
 import { CLASSIFICATION_ORDER, PHONETIC_CHANGE_ORDER } from "./data/labels";
 import type { Classification, PhoneticChange } from "./data/schema";
 
 export type ChainsRoute = { tab: "chains"; chain: string | null };
 export type BrowseRoute = { tab: "browse"; q: string; cls: Classification | null; pc: PhoneticChange | null; open: string | null };
-export type Route = ChainsRoute | BrowseRoute;
+export type DifficultyLevel = 1 | 2 | 3 | 4;
+export type DrillFilters = { cls: Classification | null; diff: DifficultyLevel | null; pc: PhoneticChange | null };
+export type DrillRoute = { tab: "drill" } & DrillFilters;
+export type PredictRoute = { tab: "predict" } & DrillFilters;
+export type Route = ChainsRoute | BrowseRoute | DrillRoute | PredictRoute;
+
+export const NO_FILTERS: DrillFilters = { cls: null, diff: null, pc: null };
 
 export const DEFAULT_ROUTE: Route = { tab: "chains", chain: null };
 
@@ -21,22 +31,45 @@ export function parseHash(hash: string): Route {
   const segments = pathPart.split("/").filter((s) => s.length > 0).map((s) => safeDecode(s));
   const params = new URLSearchParams(queryPart);
   if (segments[0] === "browse") {
-    const cls = params.get("cls");
-    const pc = params.get("pc");
-    return {
-      tab: "browse",
-      q: params.get("q") ?? "",
-      cls: cls && (CLASSIFICATION_ORDER as readonly string[]).includes(cls) ? (cls as Classification) : null,
-      pc: pc && (PHONETIC_CHANGE_ORDER as readonly string[]).includes(pc) ? (pc as PhoneticChange) : null,
-      open: params.get("open") ?? null,
-    };
+    return { tab: "browse", q: params.get("q") ?? "", cls: parseCls(params.get("cls")), pc: parsePc(params.get("pc")), open: params.get("open") ?? null };
   }
+  if (segments[0] === "drill") return { tab: "drill", ...parseFilters(params) };
+  if (segments[0] === "predict") return { tab: "predict", ...parseFilters(params) };
   if (segments[0] === "chains") return { tab: "chains", chain: segments[1] ?? null };
   return DEFAULT_ROUTE;
 }
 
+function parseCls(v: string | null): Classification | null {
+  return v && (CLASSIFICATION_ORDER as readonly string[]).includes(v) ? (v as Classification) : null;
+}
+
+function parsePc(v: string | null): PhoneticChange | null {
+  return v && (PHONETIC_CHANGE_ORDER as readonly string[]).includes(v) ? (v as PhoneticChange) : null;
+}
+
+function parseDiff(v: string | null): DifficultyLevel | null {
+  return v === "1" || v === "2" || v === "3" || v === "4" ? (Number(v) as DifficultyLevel) : null;
+}
+
+function parseFilters(params: URLSearchParams): DrillFilters {
+  return { cls: parseCls(params.get("cls")), diff: parseDiff(params.get("diff")), pc: parsePc(params.get("pc")) };
+}
+
+/** A stable key for a filter combination — the drill queue is rebuilt when it changes. */
+export function filterKey(f: DrillFilters): string {
+  return `${f.cls ?? ""}|${f.diff ?? ""}|${f.pc ?? ""}`;
+}
+
 export function toHash(route: Route): string {
   if (route.tab === "chains") return route.chain ? `#/chains/${encodeURIComponent(route.chain)}` : "#/chains";
+  if (route.tab === "drill" || route.tab === "predict") {
+    const params = new URLSearchParams();
+    if (route.cls) params.set("cls", route.cls);
+    if (route.diff) params.set("diff", String(route.diff));
+    if (route.pc) params.set("pc", route.pc);
+    const qs = params.toString();
+    return qs ? `#/${route.tab}?${qs}` : `#/${route.tab}`;
+  }
   const params = new URLSearchParams();
   if (route.q) params.set("q", route.q);
   if (route.cls) params.set("cls", route.cls);
