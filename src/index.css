@@ -1,4 +1,9 @@
-@import "tailwindcss";
+/* Tailwind scans only the app's own files for class names. Without this it
+   scans every file in the project — including the Markdown reports, whose
+   prose mentions utility names — so committing a report changed the bundle. */
+@import "tailwindcss" source(none);
+@source "../src";
+@source "../index.html";
 
 /* Paint our own ground and text color so the page reads the same in every
    browser theme; an unset background inherits whatever the viewer paints. */
