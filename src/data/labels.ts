@@ -2,7 +2,7 @@
 // ASCII identifiers (CLAUDE.md §8); the UI shows the Japanese terms. Nothing
 // else in the repo may define these strings.
 
-import type { Classification, PhoneticChange } from "./schema";
+import type { Classification, PhoneticChange, RuleReliability } from "./schema";
 
 export const CLASSIFICATION_ORDER: readonly Classification[] = [
   "on_on",
@@ -51,3 +51,14 @@ export function classificationLabel(code: Classification): string {
 export function phoneticChangeLabel(code: PhoneticChange): string {
   return PHONETIC_CHANGE_LABELS[code];
 }
+
+// DATA_SPEC.md §5.2 — how a chain's rule reliability is labeled in the UI.
+// "clean" may say rule; "usually" is hedged and never says rule; "none" chains
+// are not lessons and are never shown as one.
+export const RELIABILITY_LABELS: Record<RuleReliability, string> = {
+  clean: "Rule",
+  usually: "Usually",
+  none: "No rule",
+};
+
+export const EXCEPTION_LABEL = "Exception";
