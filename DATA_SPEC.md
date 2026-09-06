@@ -288,12 +288,16 @@ that appears twice makes a chain. `data/chains.json` is the whitelist; an entry'
   "rule": "手 is て (kun) throughout. Classification is determined entirely by the second character: on → 湯桶, kun → 訓訓.",
   "rule_reliability": "clean",     // "clean" | "usually" | "none"
   "teaching_note": "Best entry point. The rule is statable in one sentence and holds across all entries.",
-  "entry_order": ["cr_0042", "cr_0043", "cr_0044", "cr_0091"]
+  "entry_order": ["cr_0042", "cr_0043", "cr_0044", "cr_0091"],
+  "exceptions": ["cr_0091"]      // optional: entries in entry_order that contradict the rule
 }
 ```
 
 `entry_order` is the pedagogical sequence, not alphabetical or ID order. Chain
-Explorer walks it in this order.
+Explorer walks it in this order. `exceptions` (optional) names the members of
+`entry_order` that contradict the stated rule; each is placed last in
+`entry_order` and shown as the exception, and the rule text stays as written
+(手段 in the 手 chain, decided 2026-09-06).
 
 `rule_reliability` matters: `"clean"` (手, 夕, 毎) means the rule holds across
 every entry. `"usually"` (目 and the concrete/abstract split generally) means it

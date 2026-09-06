@@ -216,6 +216,7 @@ export function validateDataset(datasetRaw: unknown, chainsRaw: unknown, anchors
   }
   for (const chain of chainsFile.chains) {
     for (const id of chain.entry_order) if (!byId.has(id)) W("§7.6 entry_order id does not resolve", `chain ${chain.character}`, id);
+    for (const id of chain.exceptions ?? []) if (!chain.entry_order.includes(id)) W("§7.6 exception not in entry_order", `chain ${chain.character}`, id);
     const members = entries.filter((e) => e.chains.includes(chain.character));
     for (const m of members) if (!chain.entry_order.includes(m.id)) W("§7.6 chain member missing from entry_order", `chain ${chain.character}`, label(m));
     if (chain.rule_reliability === "clean") {

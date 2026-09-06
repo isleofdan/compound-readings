@@ -137,6 +137,9 @@ export const ChainSchema = z
     rule_reliability: RuleReliabilitySchema,
     teaching_note: z.string().nullable(),
     entry_order: z.array(z.string().regex(/^cr_\d{4}$/)),
+    // Optional: entry_order members that contradict the chain's rule. Each is
+    // shown last, labeled as an exception; the rule text itself is unchanged.
+    exceptions: z.array(z.string().regex(/^cr_\d{4}$/)).optional(),
   })
   .strict();
 export type Chain = z.infer<typeof ChainSchema>;
