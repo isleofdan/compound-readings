@@ -10,10 +10,12 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import {
+  ChainsFileSchema,
   DatasetSchema,
   deriveClassification,
   type AlternateReading,
   type AlternateStatus,
+  type ChainsFile,
   type Character,
   type Classification,
   type Entry,
@@ -228,6 +230,46 @@ export function mergePrototype(entries: Entry[]): PrototypeMerge {
   return { entries: protos, matched, unmatched, disagreements };
 }
 
+// ---------------------------------------------------------------- chains (DATA_SPEC.md §5)
+
+const CHAINS_FILE = join(ROOT, "data", "chains.json");
+
+export function loadChains(): ChainsFile {
+  const parsed = ChainsFileSchema.safeParse(JSON.parse(readFileSync(CHAINS_FILE, "utf8")));
+  if (!parsed.success) {
+    console.error(parsed.error.issues.slice(0, 20));
+    throw new Error("data/chains.json does not conform to ChainsFileSchema");
+  }
+  return parsed.data;
+}
+
+export type ChainRecompute = {
+  chainsFile: ChainsFile;
+  /** Chain characters the prototype carried that are not in the whitelist, with the entries that carried them. */
+  droppedFromPrototype: Map<string, string[]>;
+  /** Whitelist characters added to an entry that the prototype had not marked (or that had no prototype entry). */
+  added: Map<string, string[]>;
+};
+
+// Every entry's chains[] is recomputed from the whitelist: a whitelisted chain
+// character present among the kanji of `compound` → in chains[], in the
+// whitelist's display order. The prototype-merged values are reported, then
+// replaced.
+export function recomputeChains(entries: Entry[]): ChainRecompute {
+  const chainsFile = loadChains();
+  const whitelist = [...chainsFile.chains].sort((a, b) => a.display_order - b.display_order).map((c) => c.character);
+  const droppedFromPrototype = new Map<string, string[]>();
+  const added = new Map<string, string[]>();
+  for (const e of entries) {
+    const before = [...e.chains];
+    const after = whitelist.filter((ch) => kanjiOf(e.compound).includes(ch));
+    for (const ch of before) if (!after.includes(ch)) droppedFromPrototype.set(ch, [...(droppedFromPrototype.get(ch) ?? []), e.compound]);
+    for (const ch of after) if (!before.includes(ch)) added.set(ch, [...(added.get(ch) ?? []), e.compound]);
+    e.chains = after;
+  }
+  return { chainsFile, droppedFromPrototype, added };
+}
+
 // ---------------------------------------------------------------- load
 
 type Loaded = { batch: number; file: string; topLevel: Record<string, unknown>; entries: SourceEntry[] };
@@ -284,6 +326,7 @@ export type Consolidation = {
   judgments: Judgment[];
   fixes: AppliedFix[];
   prototype: PrototypeMerge;
+  chains: ChainRecompute;
 };
 
 export function consolidate(): Consolidation {
@@ -449,8 +492,9 @@ export function consolidate(): Consolidation {
   }
 
   const prototype = mergePrototype(entries);
+  const chains = recomputeChains(entries);
 
-  return { batches, entries, idTable, unexpectedEntryFields, unexpectedCharFields, unexpectedAltFields, tokenRows, statusRows, judgments, fixes, prototype };
+  return { batches, entries, idTable, unexpectedEntryFields, unexpectedCharFields, unexpectedAltFields, tokenRows, statusRows, judgments, fixes, prototype, chains };
 }
 
 // ---------------------------------------------------------------- report
@@ -637,6 +681,45 @@ export function migrationReport(c: Consolidation): string {
   P("|---|---|---|---|---|---|---|");
   for (const d of pr.disagreements)
     P(`| \`${d.proto.id}\` | ${d.proto.compound} | \`${d.entry.id}\` | ${d.field} | ${md(d.protoSays)} | ${md(d.sourceSays)} | source retained |`);
+  P();
+
+  P("## 11. Chains (DATA_SPEC.md §5)");
+  P();
+  const ch = c.chains;
+  const wl = [...ch.chainsFile.chains].sort((a, b) => a.display_order - b.display_order);
+  P(`\`data/chains.json\` (\`$status: "${ch.chainsFile.$status}"\`) is the whitelist: ${wl.length} chains. After the prototype merge, every entry's \`chains[]\` was recomputed from it — a whitelisted character among the kanji of \`compound\` → in \`chains[]\`. The prototype's chain marks were the input to the proposal and are accounted for here.`);
+  P();
+  const droppedTotal = [...ch.droppedFromPrototype.values()].reduce((s, xs) => s + xs.length, 0);
+  P(`Prototype chain characters not in the whitelist (dropped from \`chains[]\`, ${ch.droppedFromPrototype.size} characters on ${droppedTotal} entry marks — each is a character with fewer than three entries and not named in CLAUDE.md §5):`);
+  P();
+  P("| Character | Prototype entries that carried it |");
+  P("|---|---|");
+  for (const [k, xs] of [...ch.droppedFromPrototype.entries()].sort()) P(`| ${k} | ${xs.join(", ")} |`);
+  P();
+  const addedTotal = [...ch.added.values()].reduce((s, xs) => s + xs.length, 0);
+  P(`Whitelist characters added to \`chains[]\` that the prototype had not marked (${ch.added.size} characters, ${addedTotal} entry marks — most on entries the prototype does not contain):`);
+  P();
+  P("| Character | Entries |");
+  P("|---|---|");
+  for (const [k, xs] of [...ch.added.entries()].sort()) P(`| ${k} | ${xs.join(", ")} |`);
+  P();
+  P("Per chain — members and classifications, in `entry_order`:");
+  P();
+  P("| # | Chain | Reliability | Entries | Classifications | Members (in entry_order) |");
+  P("|---|---|---|---|---|---|");
+  const byId = new Map(c.entries.map((e) => [e.id, e]));
+  for (const chain of wl) {
+    const members = chain.entry_order.map((id) => byId.get(id)).filter((e): e is Entry => !!e);
+    const bd = count(members, (e) => e.classification);
+    P(
+      `| ${chain.display_order} | ${chain.character} | ${chain.rule_reliability} | ${members.length} | ${
+        [...bd.entries()].map(([k, v]) => `${CLASSIFICATION_LABELS[k as Classification]}×${v}`).join(", ") || "—"
+      } | ${members.map((e) => `${e.compound} (${CLASSIFICATION_LABELS[e.classification]})`).join(", ") || "(no entries)"} |`,
+    );
+  }
+  P();
+  const zeroChains = c.entries.filter((e) => e.chains.length === 0);
+  P(`Entries in zero chains: ${zeroChains.length} of ${c.entries.length}.`);
   P();
 
   return L.join("\n") + "\n";

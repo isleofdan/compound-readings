@@ -144,6 +144,7 @@ export type Chain = z.infer<typeof ChainSchema>;
 export const ChainsFileSchema = z
   .object({
     $status: z.enum(["proposed", "approved"]),
+    $note: z.string().optional(),
     chains: z.array(ChainSchema),
   })
   .strict();

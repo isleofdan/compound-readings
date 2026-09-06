@@ -66,3 +66,22 @@ describe("prototype merge", () => {
     expect(c.prototype.disagreements.length).toBe(28);
   });
 });
+
+describe("chains", () => {
+  const c = consolidate();
+  it("carries every chain CLAUDE.md §5 names and is proposed, not approved", () => {
+    expect(c.chains.chainsFile.$status).toBe("proposed");
+    const chars = c.chains.chainsFile.chains.map((x) => x.character);
+    for (const ch of ["場", "手", "目", "夕", "毎", "一", "新", "茶", "焼", "値", "所", "本"]) expect(chars).toContain(ch);
+  });
+  it("recomputes chains[] from the whitelist", () => {
+    const wl = new Set(c.chains.chainsFile.chains.map((x) => x.character));
+    for (const e of c.entries) {
+      for (const ch of e.chains) {
+        expect(wl.has(ch)).toBe(true);
+        expect(e.compound).toContain(ch);
+      }
+      for (const ch of wl) if ([...e.compound].includes(ch)) expect(e.chains).toContain(ch);
+    }
+  });
+});

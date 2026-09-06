@@ -1,0 +1,402 @@
+{
+  "$status": "proposed",
+  "$note": "Proposed chain whitelist (DATA_SPEC.md §5.2). Rows exist for every kanji appearing in three or more entries plus every chain CLAUDE.md §5 names. Only the five chains CLAUDE.md §5 describes carry a rule; every other row is rule_reliability \"none\" until Dan rules on it in his study project, and nothing in the UI may present a \"none\" chain as a lesson.",
+  "chains": [
+    {
+      "character": "手",
+      "display_order": 1,
+      "rule": "手 is て (kun) throughout; classification is determined entirely by the second character: on → 湯桶 (手本, 手帳, 手数), kun → 訓訓 (手紙, 手間).",
+      "rule_reliability": "clean",
+      "teaching_note": "Best introduction: the rule is statable in one sentence and shows the same character with the same reading classified by its partner alone. Order: the 訓訓 entries, then the 湯桶 entries. 手段 (しゅだん, 手 = シュ on) is in the dataset and contradicts \"throughout\"; it is placed last and the validator flags it for Dan to rule on.",
+      "entry_order": [
+        "cr_0010",
+        "cr_0044",
+        "cr_0041",
+        "cr_0101",
+        "cr_0056",
+        "cr_0057",
+        "cr_0058",
+        "cr_0110",
+        "cr_0111"
+      ]
+    },
+    {
+      "character": "場",
+      "display_order": 2,
+      "rule": "A character's reading type is not a fixed property: 場 is ジョウ (on) in 入場, 会場, 工場 and ば (kun) in 職場, 本場, 役場, 立場, 場面, 場所; the partner decides, and the classification shifts with it.",
+      "rule_reliability": "usually",
+      "teaching_note": "The richest chain, spanning four classifications, and the payoff chain. Build toward 場所 last: it is the signature trap — ば is kun, ジョウ is on; learners assume a short, high-frequency reading must be on and misclassify 場所 as 音音. The reliability value is a proposal (CLAUDE.md §5 gives none for 場); Dan to rule.",
+      "entry_order": [
+        "cr_0086",
+        "cr_0087",
+        "cr_0088",
+        "cr_0048",
+        "cr_0049",
+        "cr_0078",
+        "cr_0047",
+        "cr_0085",
+        "cr_0027"
+      ]
+    },
+    {
+      "character": "夕",
+      "display_order": 3,
+      "rule": "夕 is always ゆう (kun), across 夕刊, 夕食, 夕飯, 夕暮れ; the partner sets the classification.",
+      "rule_reliability": "clean",
+      "teaching_note": "A reliability anchor: some characters are stable. Also the documented leak in the semantic heuristic — 夕食 stays 湯桶 despite the formality that makes 朝食 音音.",
+      "entry_order": [
+        "cr_0024",
+        "cr_0115",
+        "cr_0116",
+        "cr_0166"
+      ]
+    },
+    {
+      "character": "毎",
+      "display_order": 4,
+      "rule": "毎 is always マイ (on); the classification of 毎X is determined by the second character alone: kun → 重箱, on → 音音.",
+      "rule_reliability": "clean",
+      "teaching_note": "A complete system in the dataset: 毎朝, 毎月, 毎晩, 毎年, 毎回 (毎日 exists only in the prototype and is not an entry).",
+      "entry_order": [
+        "cr_0019",
+        "cr_0054",
+        "cr_0081",
+        "cr_0082",
+        "cr_0155"
+      ]
+    },
+    {
+      "character": "目",
+      "display_order": 5,
+      "rule": "Semantic split: め (kun) in concrete/practical compounds (目印, 目玉, 目安), モク (on) in abstract/strategic ones (目標, 目的).",
+      "rule_reliability": "usually",
+      "teaching_note": "Named in CLAUDE.md §5, but no entry in the four source batches contains 目 — none of 目印, 目玉, 目安, 目標, 目的 exists in the dataset. The chain has no members until the dataset grows (Phase 3). Flagged in reports/02-flagged.md.",
+      "entry_order": []
+    },
+    {
+      "character": "物",
+      "display_order": 6,
+      "rule": null,
+      "rule_reliability": "none",
+      "teaching_note": null,
+      "entry_order": [
+        "cr_0012",
+        "cr_0073",
+        "cr_0089",
+        "cr_0090",
+        "cr_0091",
+        "cr_0109",
+        "cr_0122",
+        "cr_0123",
+        "cr_0129"
+      ]
+    },
+    {
+      "character": "人",
+      "display_order": 7,
+      "rule": null,
+      "rule_reliability": "none",
+      "teaching_note": null,
+      "entry_order": [
+        "cr_0029",
+        "cr_0066",
+        "cr_0067",
+        "cr_0074",
+        "cr_0150",
+        "cr_0151"
+      ]
+    },
+    {
+      "character": "日",
+      "display_order": 8,
+      "rule": null,
+      "rule_reliability": "none",
+      "teaching_note": null,
+      "entry_order": [
+        "cr_0030",
+        "cr_0061",
+        "cr_0063",
+        "cr_0064",
+        "cr_0119",
+        "cr_0153"
+      ]
+    },
+    {
+      "character": "本",
+      "display_order": 9,
+      "rule": null,
+      "rule_reliability": "none",
+      "teaching_note": null,
+      "entry_order": [
+        "cr_0015",
+        "cr_0023",
+        "cr_0049",
+        "cr_0056",
+        "cr_0059",
+        "cr_0109"
+      ]
+    },
+    {
+      "character": "真",
+      "display_order": 10,
+      "rule": null,
+      "rule_reliability": "none",
+      "teaching_note": null,
+      "entry_order": [
+        "cr_0133",
+        "cr_0134",
+        "cr_0135",
+        "cr_0136",
+        "cr_0137",
+        "cr_0138"
+      ]
+    },
+    {
+      "character": "雨",
+      "display_order": 11,
+      "rule": null,
+      "rule_reliability": "none",
+      "teaching_note": null,
+      "entry_order": [
+        "cr_0014",
+        "cr_0025",
+        "cr_0070",
+        "cr_0084",
+        "cr_0117",
+        "cr_0118"
+      ]
+    },
+    {
+      "character": "一",
+      "display_order": 12,
+      "rule": null,
+      "rule_reliability": "none",
+      "teaching_note": null,
+      "entry_order": [
+        "cr_0106",
+        "cr_0119",
+        "cr_0150",
+        "cr_0162",
+        "cr_0163"
+      ]
+    },
+    {
+      "character": "朝",
+      "display_order": 13,
+      "rule": null,
+      "rule_reliability": "none",
+      "teaching_note": null,
+      "entry_order": [
+        "cr_0019",
+        "cr_0061",
+        "cr_0113",
+        "cr_0114",
+        "cr_0124"
+      ]
+    },
+    {
+      "character": "生",
+      "display_order": 14,
+      "rule": null,
+      "rule_reliability": "none",
+      "teaching_note": null,
+      "entry_order": [
+        "cr_0043",
+        "cr_0103",
+        "cr_0104",
+        "cr_0105"
+      ]
+    },
+    {
+      "character": "立",
+      "display_order": 15,
+      "rule": null,
+      "rule_reliability": "none",
+      "teaching_note": null,
+      "entry_order": [
+        "cr_0020",
+        "cr_0047",
+        "cr_0093",
+        "cr_0121"
+      ]
+    },
+    {
+      "character": "間",
+      "display_order": 16,
+      "rule": null,
+      "rule_reliability": "none",
+      "teaching_note": null,
+      "entry_order": [
+        "cr_0018",
+        "cr_0044",
+        "cr_0107",
+        "cr_0108"
+      ]
+    },
+    {
+      "character": "新",
+      "display_order": 17,
+      "rule": null,
+      "rule_reliability": "none",
+      "teaching_note": null,
+      "entry_order": [
+        "cr_0053",
+        "cr_0101",
+        "cr_0143"
+      ]
+    },
+    {
+      "character": "替",
+      "display_order": 18,
+      "rule": null,
+      "rule_reliability": "none",
+      "teaching_note": null,
+      "entry_order": [
+        "cr_0032",
+        "cr_0069",
+        "cr_0159"
+      ]
+    },
+    {
+      "character": "月",
+      "display_order": 19,
+      "rule": null,
+      "rule_reliability": "none",
+      "teaching_note": null,
+      "entry_order": [
+        "cr_0046",
+        "cr_0054",
+        "cr_0118"
+      ]
+    },
+    {
+      "character": "段",
+      "display_order": 20,
+      "rule": null,
+      "rule_reliability": "none",
+      "teaching_note": null,
+      "entry_order": [
+        "cr_0106",
+        "cr_0111",
+        "cr_0164"
+      ]
+    },
+    {
+      "character": "焼",
+      "display_order": 21,
+      "rule": null,
+      "rule_reliability": "none",
+      "teaching_note": null,
+      "entry_order": [
+        "cr_0079",
+        "cr_0080",
+        "cr_0083"
+      ]
+    },
+    {
+      "character": "番",
+      "display_order": 22,
+      "rule": null,
+      "rule_reliability": "none",
+      "teaching_note": null,
+      "entry_order": [
+        "cr_0017",
+        "cr_0112",
+        "cr_0131"
+      ]
+    },
+    {
+      "character": "組",
+      "display_order": 23,
+      "rule": null,
+      "rule_reliability": "none",
+      "teaching_note": null,
+      "entry_order": [
+        "cr_0017",
+        "cr_0093",
+        "cr_0157"
+      ]
+    },
+    {
+      "character": "花",
+      "display_order": 24,
+      "rule": null,
+      "rule_reliability": "none",
+      "teaching_note": null,
+      "entry_order": [
+        "cr_0008",
+        "cr_0042",
+        "cr_0103"
+      ]
+    },
+    {
+      "character": "茶",
+      "display_order": 25,
+      "rule": null,
+      "rule_reliability": "none",
+      "teaching_note": null,
+      "entry_order": [
+        "cr_0055",
+        "cr_0141",
+        "cr_0145"
+      ]
+    },
+    {
+      "character": "見",
+      "display_order": 26,
+      "rule": null,
+      "rule_reliability": "none",
+      "teaching_note": null,
+      "entry_order": [
+        "cr_0008",
+        "cr_0023",
+        "cr_0046"
+      ]
+    },
+    {
+      "character": "金",
+      "display_order": 27,
+      "rule": null,
+      "rule_reliability": "none",
+      "teaching_note": null,
+      "entry_order": [
+        "cr_0129",
+        "cr_0130",
+        "cr_0132"
+      ]
+    },
+    {
+      "character": "額",
+      "display_order": 28,
+      "rule": null,
+      "rule_reliability": "none",
+      "teaching_note": null,
+      "entry_order": [
+        "cr_0021",
+        "cr_0132",
+        "cr_0140"
+      ]
+    },
+    {
+      "character": "値",
+      "display_order": 29,
+      "rule": null,
+      "rule_reliability": "none",
+      "teaching_note": null,
+      "entry_order": [
+        "cr_0164"
+      ]
+    },
+    {
+      "character": "所",
+      "display_order": 30,
+      "rule": null,
+      "rule_reliability": "none",
+      "teaching_note": null,
+      "entry_order": [
+        "cr_0016",
+        "cr_0027"
+      ]
+    }
+  ]
+}
