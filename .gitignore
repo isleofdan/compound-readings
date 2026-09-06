@@ -2,5 +2,7 @@ node_modules/
 dist/
 .env*
 # The compact dataset the app consumes is build output derived from data/compounds.json.
-# It is regenerated on every build and must never be hand-edited, so it is not committed.
-data/generated/
+# It is regenerated on every build and must never be hand-edited, so its contents are not
+# committed. Only the .gitkeep placeholder is kept so the folder exists in a fresh clone.
+data/generated/*
+!data/generated/.gitkeep

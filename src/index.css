@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+/* Paint our own ground and text color so the page reads the same in every
+   browser theme; an unset background inherits whatever the viewer paints. */
+html {
+  color-scheme: light;
+  background-color: #ffffff;
+  color: #171717;
+}
