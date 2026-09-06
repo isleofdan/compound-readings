@@ -60,7 +60,7 @@ export function DrillOutcome({ e, chosen }: { e: CompactEntry; chosen: Classific
           {l}
         </div>
       ))}
-      <div className="mt-1 text-neutral-800">{mechanismLine(e)}</div>
+      {!(e.cls === "jukujikun" && !correct) && <div className="mt-1 text-neutral-800">{mechanismLine(e)}</div>}
     </div>
   );
 }
