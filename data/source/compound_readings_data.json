@@ -1,0 +1,959 @@
+{
+  "$schema_notes": "Compound Reading Pattern entries for advanced Japanese learner drill/reference tool",
+  "$schema_version": "0.1.0",
+  "$entry_schema": {
+    "id": "string — unique identifier",
+    "compound": "string — kanji compound",
+    "reading": "string — full reading in hiragana",
+    "characters": [
+      {
+        "kanji": "string — single character",
+        "reading_in_compound": "string — this character's reading here",
+        "reading_type": "on | kun",
+        "on_readings": ["string — standard on readings for reference"],
+        "kun_readings": ["string — standard kun readings for reference"],
+        "reading_note": "string | null — why this reading is unexpected"
+      }
+    ],
+    "classification": "on_on | kun_kun | juubako | yutou | jukujikun | irregular",
+    "phonetic_changes": ["rendaku | sokuon | long_vowel | other — list of changes applied"],
+    "phonetic_change_detail": "string | null — explanation of sound change",
+    "difficulty": "1-4 integer — 1=anchor, 2=moderate, 3=tricky, 4=edge case/framework-breaker",
+    "difficulty_rationale": "string — why this difficulty rating",
+    "real_world_context": "string — concrete situation where this compound causes hesitation",
+    "trap_note": "string | null — what advanced learners commonly get wrong about this entry"
+  },
+
+  "entries": [
+
+    {
+      "id": "on_on_01",
+      "compound": "学校",
+      "reading": "がっこう",
+      "characters": [
+        {
+          "kanji": "学",
+          "reading_in_compound": "がっ",
+          "reading_type": "on",
+          "on_readings": ["ガク"],
+          "kun_readings": ["まなぶ"],
+          "reading_note": "ガク → がっ via 促音 before こ"
+        },
+        {
+          "kanji": "校",
+          "reading_in_compound": "こう",
+          "reading_type": "on",
+          "on_readings": ["コウ"],
+          "kun_readings": [],
+          "reading_note": null
+        }
+      ],
+      "classification": "on_on",
+      "phonetic_changes": ["sokuon"],
+      "phonetic_change_detail": "ガク + コウ → がっこう (final ク assimilates before コ)",
+      "difficulty": 1,
+      "difficulty_rationale": "Universal anchor — every learner knows this word. Useful as a classification confidence-builder.",
+      "real_world_context": "N/A — anchor example. But demonstrates 促音 pattern that recurs in many 音音 compounds.",
+      "trap_note": null
+    },
+
+    {
+      "id": "on_on_02",
+      "compound": "相殺",
+      "reading": "そうさい",
+      "characters": [
+        {
+          "kanji": "相",
+          "reading_in_compound": "そう",
+          "reading_type": "on",
+          "on_readings": ["ソウ", "ショウ"],
+          "kun_readings": ["あい"],
+          "reading_note": null
+        },
+        {
+          "kanji": "殺",
+          "reading_in_compound": "さい",
+          "reading_type": "on",
+          "on_readings": ["サツ", "サイ", "セツ"],
+          "kun_readings": ["ころす"],
+          "reading_note": "サイ is the correct on reading here, not サツ. Most learners only know 殺=サツ."
+        }
+      ],
+      "classification": "on_on",
+      "phonetic_changes": [],
+      "phonetic_change_detail": null,
+      "difficulty": 3,
+      "difficulty_rationale": "殺 as サイ is unexpected for most learners who default to サツ. Common in business/legal contexts.",
+      "real_world_context": "Financial discussions — '利益を相殺する' (offset profits). Mispronouncing this as そうさつ in a meeting is a visible stumble.",
+      "trap_note": "Learners who know 殺=サツ will read this as そうさつ. The サイ reading is specific to this compound and a few related words (相殺勘定 etc.)."
+    },
+
+    {
+      "id": "on_on_03",
+      "compound": "出納",
+      "reading": "すいとう",
+      "characters": [
+        {
+          "kanji": "出",
+          "reading_in_compound": "すい",
+          "reading_type": "on",
+          "on_readings": ["シュツ", "スイ"],
+          "kun_readings": ["でる", "だす"],
+          "reading_note": "スイ is the 呉音 (go-on) reading, rarely encountered outside this compound and 出納係."
+        },
+        {
+          "kanji": "納",
+          "reading_in_compound": "とう",
+          "reading_type": "on",
+          "on_readings": ["ノウ", "ナッ", "ナ", "トウ"],
+          "kun_readings": ["おさめる", "おさまる"],
+          "reading_note": "トウ is the 唐音 (tō-on) reading. Very rare — mainly survives in this compound."
+        }
+      ],
+      "classification": "on_on",
+      "phonetic_changes": [],
+      "phonetic_change_detail": null,
+      "difficulty": 4,
+      "difficulty_rationale": "Both characters use archaic on readings that most learners have never encountered. Functionally irregular despite being technically 音音.",
+      "real_world_context": "Office administration — 出納帳 (cash book), 出納係 (cashier/treasurer). Appears on forms and in accounting contexts. Reading this wrong marks you as an outsider.",
+      "trap_note": "Almost everyone's first instinct is しゅつのう. Both characters use their rarest on readings. Knowing this is 音音 doesn't help you predict the reading — you simply have to know it. This is an honest example of where classification fails as a prediction tool."
+    },
+
+    {
+      "id": "on_on_04",
+      "compound": "遊説",
+      "reading": "ゆうぜい",
+      "characters": [
+        {
+          "kanji": "遊",
+          "reading_in_compound": "ゆう",
+          "reading_type": "on",
+          "on_readings": ["ユウ", "ユ"],
+          "kun_readings": ["あそぶ"],
+          "reading_note": null
+        },
+        {
+          "kanji": "説",
+          "reading_in_compound": "ぜい",
+          "reading_type": "on",
+          "on_readings": ["セツ", "ゼイ"],
+          "kun_readings": ["とく"],
+          "reading_note": "ゼイ is a rare on reading for 説, essentially only surviving in this word."
+        }
+      ],
+      "classification": "on_on",
+      "phonetic_changes": [],
+      "phonetic_change_detail": null,
+      "difficulty": 3,
+      "difficulty_rationale": "説 as ゼイ is a fossil reading. Appears in news/politics enough that advanced learners encounter it.",
+      "real_world_context": "Political news — 選挙遊説 (campaign tour/stumping). Comes up during election seasons. Reading it as ゆうせつ is common and noticeable.",
+      "trap_note": "Even native speakers sometimes say ゆうせつ. NHK prescribes ゆうぜい. Useful example for the 'native speaker ≠ ground truth' principle — many natives get this wrong too."
+    },
+
+    {
+      "id": "on_on_05",
+      "compound": "貼付",
+      "reading": "ちょうふ",
+      "characters": [
+        {
+          "kanji": "貼",
+          "reading_in_compound": "ちょう",
+          "reading_type": "on",
+          "on_readings": ["チョウ", "テン"],
+          "kun_readings": ["はる"],
+          "reading_note": "Both チョウ and テン are on readings. チョウ is the prescriptive standard here."
+        },
+        {
+          "kanji": "付",
+          "reading_in_compound": "ふ",
+          "reading_type": "on",
+          "on_readings": ["フ"],
+          "kun_readings": ["つける", "つく"],
+          "reading_note": null
+        }
+      ],
+      "classification": "on_on",
+      "phonetic_changes": [],
+      "phonetic_change_detail": null,
+      "difficulty": 3,
+      "difficulty_rationale": "Widely mispronounced as てんぷ even by native speakers. Contested reading makes it tricky for learners.",
+      "real_world_context": "Document handling — '写真を貼付してください' on application forms. Email attachments. Bureaucratic contexts where getting it right signals competence.",
+      "trap_note": "てんぷ is so widespread that many dictionaries now list it as an accepted variant. This is a live example of reading shift in progress. Advanced learners should know ちょうふ is prescriptive but てんぷ won't get them corrected in practice."
+    },
+
+    {
+      "id": "on_on_06",
+      "compound": "早速",
+      "reading": "さっそく",
+      "characters": [
+        {
+          "kanji": "早",
+          "reading_in_compound": "さっ",
+          "reading_type": "on",
+          "on_readings": ["ソウ", "サッ"],
+          "kun_readings": ["はやい", "はやまる"],
+          "reading_note": "サッ is a variant on reading (promoted 促音 form)."
+        },
+        {
+          "kanji": "速",
+          "reading_in_compound": "そく",
+          "reading_type": "on",
+          "on_readings": ["ソク"],
+          "kun_readings": ["はやい", "はやめる", "すみやか"],
+          "reading_note": null
+        }
+      ],
+      "classification": "on_on",
+      "phonetic_changes": ["sokuon"],
+      "phonetic_change_detail": "ソウ + ソク → さっそく (促音 assimilation)",
+      "difficulty": 1,
+      "difficulty_rationale": "Very common word. Most learners know the reading but may not think about why it's さっそく rather than そうそく.",
+      "real_world_context": "Business email opener — '早速ですが...' Extremely high frequency. Good for showing 促音 as systematic rather than random.",
+      "trap_note": "The interesting teaching point is *why* さっ and not そう. The 促音 pattern (final vowel drops, consonant doubles before ソ/サ/カ etc.) recurs across many 音音 compounds."
+    },
+
+    {
+      "id": "on_on_07",
+      "compound": "境内",
+      "reading": "けいだい",
+      "characters": [
+        {
+          "kanji": "境",
+          "reading_in_compound": "けい",
+          "reading_type": "on",
+          "on_readings": ["キョウ", "ケイ"],
+          "kun_readings": ["さかい"],
+          "reading_note": "ケイ is the less common on reading. Most learners default to キョウ."
+        },
+        {
+          "kanji": "内",
+          "reading_in_compound": "だい",
+          "reading_type": "on",
+          "on_readings": ["ナイ", "ダイ"],
+          "kun_readings": ["うち"],
+          "reading_note": "ダイ is the 呉音 reading. Uncommon — most contexts use ナイ."
+        }
+      ],
+      "classification": "on_on",
+      "phonetic_changes": [],
+      "phonetic_change_detail": null,
+      "difficulty": 3,
+      "difficulty_rationale": "Both characters use their less common on readings. きょうない is the intuitive guess and is wrong.",
+      "real_world_context": "Temple/shrine visits — 境内マップ, 境内禁煙. Tourist situations where you're reading signs aloud or discussing with companions.",
+      "trap_note": "きょうない sounds plausible and is a common misreading. The 呉音 readings (ケイ, ダイ) signal Buddhist/temple vocabulary — a useful pattern to internalize."
+    },
+
+    {
+      "id": "kun_kun_01",
+      "compound": "花見",
+      "reading": "はなみ",
+      "characters": [
+        {
+          "kanji": "花",
+          "reading_in_compound": "はな",
+          "reading_type": "kun",
+          "on_readings": ["カ"],
+          "kun_readings": ["はな"],
+          "reading_note": null
+        },
+        {
+          "kanji": "見",
+          "reading_in_compound": "み",
+          "reading_type": "kun",
+          "on_readings": ["ケン"],
+          "kun_readings": ["みる", "み"],
+          "reading_note": null
+        }
+      ],
+      "classification": "kun_kun",
+      "phonetic_changes": [],
+      "phonetic_change_detail": null,
+      "difficulty": 1,
+      "difficulty_rationale": "Universal anchor. Immediately recognizable seasonal vocabulary.",
+      "real_world_context": "Spring social plans — 花見に行こう. Cultural touchstone that every learner in Japan encounters.",
+      "trap_note": null
+    },
+
+    {
+      "id": "kun_kun_02",
+      "compound": "山道",
+      "reading": "やまみち",
+      "characters": [
+        {
+          "kanji": "山",
+          "reading_in_compound": "やま",
+          "reading_type": "kun",
+          "on_readings": ["サン", "セン"],
+          "kun_readings": ["やま"],
+          "reading_note": null
+        },
+        {
+          "kanji": "道",
+          "reading_in_compound": "みち",
+          "reading_type": "kun",
+          "on_readings": ["ドウ", "トウ"],
+          "kun_readings": ["みち"],
+          "reading_note": null
+        }
+      ],
+      "classification": "kun_kun",
+      "phonetic_changes": [],
+      "phonetic_change_detail": null,
+      "difficulty": 1,
+      "difficulty_rationale": "Clean anchor. Also useful contrast — 山道 is やまみち but 国道 is こくどう (音音). Same 道 character, different reading based on partner.",
+      "real_world_context": "Hiking, driving directions, rural travel. Signage in mountainous areas.",
+      "trap_note": "Note that さんどう also exists as a reading (mountain path in Buddhist/literary contexts). Context disambiguates, but this is a good example of the same compound having different readings in different registers."
+    },
+
+    {
+      "id": "kun_kun_03",
+      "compound": "手紙",
+      "reading": "てがみ",
+      "characters": [
+        {
+          "kanji": "手",
+          "reading_in_compound": "て",
+          "reading_type": "kun",
+          "on_readings": ["シュ"],
+          "kun_readings": ["て", "た"],
+          "reading_note": null
+        },
+        {
+          "kanji": "紙",
+          "reading_in_compound": "がみ",
+          "reading_type": "kun",
+          "on_readings": ["シ"],
+          "kun_readings": ["かみ"],
+          "reading_note": "かみ → がみ via 連濁"
+        }
+      ],
+      "classification": "kun_kun",
+      "phonetic_changes": ["rendaku"],
+      "phonetic_change_detail": "かみ → がみ (連濁 — voicing of initial consonant in second element)",
+      "difficulty": 1,
+      "difficulty_rationale": "Everyone knows this word. Teaching value is in recognizing the 連濁 pattern.",
+      "real_world_context": "Daily life. Also a classic false friend for Chinese speakers (手紙 means 'toilet paper' in Chinese).",
+      "trap_note": null
+    },
+
+    {
+      "id": "kun_kun_04",
+      "compound": "木陰",
+      "reading": "こかげ",
+      "characters": [
+        {
+          "kanji": "木",
+          "reading_in_compound": "こ",
+          "reading_type": "kun",
+          "on_readings": ["モク", "ボク"],
+          "kun_readings": ["き", "こ"],
+          "reading_note": "こ is an older/compositional kun reading of 木, seen in 木立(こだち), 木漏れ日(こもれび)."
+        },
+        {
+          "kanji": "陰",
+          "reading_in_compound": "かげ",
+          "reading_type": "kun",
+          "on_readings": ["イン"],
+          "kun_readings": ["かげ"],
+          "reading_note": null
+        }
+      ],
+      "classification": "kun_kun",
+      "phonetic_changes": [],
+      "phonetic_change_detail": null,
+      "difficulty": 2,
+      "difficulty_rationale": "木 as こ (not き) catches learners off guard. Recognizing this compositional kun pattern is useful.",
+      "real_world_context": "Outdoor situations, literary contexts. '木陰で休もう' — resting in the shade of trees.",
+      "trap_note": "Learners may try きかげ. The こ reading of 木 appears in several nature compounds and is worth learning as a pattern: 木陰, 木立, 木漏れ日."
+    },
+
+    {
+      "id": "kun_kun_05",
+      "compound": "物語",
+      "reading": "ものがたり",
+      "characters": [
+        {
+          "kanji": "物",
+          "reading_in_compound": "もの",
+          "reading_type": "kun",
+          "on_readings": ["ブツ", "モツ"],
+          "kun_readings": ["もの"],
+          "reading_note": null
+        },
+        {
+          "kanji": "語",
+          "reading_in_compound": "がたり",
+          "reading_type": "kun",
+          "on_readings": ["ゴ"],
+          "kun_readings": ["かたる", "かたらう"],
+          "reading_note": "かたり → がたり via 連濁"
+        }
+      ],
+      "classification": "kun_kun",
+      "phonetic_changes": ["rendaku"],
+      "phonetic_change_detail": "かたり → がたり (連濁)",
+      "difficulty": 1,
+      "difficulty_rationale": "Well-known word. Good for demonstrating 連濁 in 訓訓 compounds — the pattern is extremely productive.",
+      "real_world_context": "Book titles, media — 源氏物語, film/anime titles. High cultural frequency.",
+      "trap_note": null
+    },
+
+    {
+      "id": "kun_kun_06",
+      "compound": "親子",
+      "reading": "おやこ",
+      "characters": [
+        {
+          "kanji": "親",
+          "reading_in_compound": "おや",
+          "reading_type": "kun",
+          "on_readings": ["シン"],
+          "kun_readings": ["おや", "したしい", "したしむ"],
+          "reading_note": null
+        },
+        {
+          "kanji": "子",
+          "reading_in_compound": "こ",
+          "reading_type": "kun",
+          "on_readings": ["シ", "ス"],
+          "kun_readings": ["こ"],
+          "reading_note": null
+        }
+      ],
+      "classification": "kun_kun",
+      "phonetic_changes": [],
+      "phonetic_change_detail": null,
+      "difficulty": 1,
+      "difficulty_rationale": "Easy anchor. Note that 親子丼 keeps this reading — useful real-world extension.",
+      "real_world_context": "Restaurants (親子丼), family situations, legal contexts (親子関係).",
+      "trap_note": "Contrast with 親子 しんし which doesn't exist — but 父子 is ふし (音音). Same semantic field, different reading patterns."
+    },
+
+    {
+      "id": "kun_kun_07",
+      "compound": "雨戸",
+      "reading": "あまど",
+      "characters": [
+        {
+          "kanji": "雨",
+          "reading_in_compound": "あま",
+          "reading_type": "kun",
+          "on_readings": ["ウ"],
+          "kun_readings": ["あめ", "あま"],
+          "reading_note": "あま is the compositional form of あめ, used when 雨 is the first element in compounds."
+        },
+        {
+          "kanji": "戸",
+          "reading_in_compound": "ど",
+          "reading_type": "kun",
+          "on_readings": ["コ"],
+          "kun_readings": ["と"],
+          "reading_note": "と → ど via 連濁"
+        }
+      ],
+      "classification": "kun_kun",
+      "phonetic_changes": ["rendaku"],
+      "phonetic_change_detail": "と → ど (連濁)",
+      "difficulty": 2,
+      "difficulty_rationale": "雨 as あま (not あめ) is the teaching point — compositional forms of kun readings are a systematic pattern.",
+      "real_world_context": "Housing/daily life — storm shutters. '雨戸を閉めて' during typhoon season.",
+      "trap_note": "The あめ→あま alternation is productive: 雨戸, 雨雲(あまぐも), 雨宿り(あまやどり). Teaching this as a pattern rather than exceptions is exactly the tool's value proposition."
+    },
+
+    {
+      "id": "juubako_01",
+      "compound": "本棚",
+      "reading": "ほんだな",
+      "characters": [
+        {
+          "kanji": "本",
+          "reading_in_compound": "ほん",
+          "reading_type": "on",
+          "on_readings": ["ホン"],
+          "kun_readings": ["もと"],
+          "reading_note": null
+        },
+        {
+          "kanji": "棚",
+          "reading_in_compound": "だな",
+          "reading_type": "kun",
+          "on_readings": ["ホウ"],
+          "kun_readings": ["たな"],
+          "reading_note": "たな → だな via 連濁"
+        }
+      ],
+      "classification": "juubako",
+      "phonetic_changes": ["rendaku"],
+      "phonetic_change_detail": "たな → だな (連濁)",
+      "difficulty": 1,
+      "difficulty_rationale": "Clean anchor for 重箱読み. The pattern (Sino-Japanese concept + native Japanese object) is visible.",
+      "real_world_context": "Furniture shopping, organizing. Extremely common household word.",
+      "trap_note": null
+    },
+
+    {
+      "id": "juubako_02",
+      "compound": "台所",
+      "reading": "だいどころ",
+      "characters": [
+        {
+          "kanji": "台",
+          "reading_in_compound": "だい",
+          "reading_type": "on",
+          "on_readings": ["ダイ", "タイ"],
+          "kun_readings": [],
+          "reading_note": null
+        },
+        {
+          "kanji": "所",
+          "reading_in_compound": "どころ",
+          "reading_type": "kun",
+          "on_readings": ["ショ"],
+          "kun_readings": ["ところ"],
+          "reading_note": "ところ → どころ via 連濁"
+        }
+      ],
+      "classification": "juubako",
+      "phonetic_changes": ["rendaku"],
+      "phonetic_change_detail": "ところ → どころ (連濁)",
+      "difficulty": 1,
+      "difficulty_rationale": "Classic example. Also demonstrates the semantic pattern: abstract/formal first element + concrete/native second element.",
+      "real_world_context": "Real estate listings, daily life. '台所が広い' — kitchen is spacious.",
+      "trap_note": null
+    },
+
+    {
+      "id": "juubako_03",
+      "compound": "番組",
+      "reading": "ばんぐみ",
+      "characters": [
+        {
+          "kanji": "番",
+          "reading_in_compound": "ばん",
+          "reading_type": "on",
+          "on_readings": ["バン"],
+          "kun_readings": ["つがい"],
+          "reading_note": null
+        },
+        {
+          "kanji": "組",
+          "reading_in_compound": "ぐみ",
+          "reading_type": "kun",
+          "on_readings": ["ソ"],
+          "kun_readings": ["くむ", "くみ"],
+          "reading_note": "くみ → ぐみ via 連濁"
+        }
+      ],
+      "classification": "juubako",
+      "phonetic_changes": ["rendaku"],
+      "phonetic_change_detail": "くみ → ぐみ (連濁)",
+      "difficulty": 1,
+      "difficulty_rationale": "Very common word. Good example of productive 重箱 pattern in media vocabulary.",
+      "real_world_context": "TV, radio, podcast discussions. 'この番組は...' — high-frequency media vocabulary.",
+      "trap_note": null
+    },
+
+    {
+      "id": "juubako_04",
+      "compound": "客間",
+      "reading": "きゃくま",
+      "characters": [
+        {
+          "kanji": "客",
+          "reading_in_compound": "きゃく",
+          "reading_type": "on",
+          "on_readings": ["キャク", "カク"],
+          "kun_readings": [],
+          "reading_note": null
+        },
+        {
+          "kanji": "間",
+          "reading_in_compound": "ま",
+          "reading_type": "kun",
+          "on_readings": ["カン", "ケン"],
+          "kun_readings": ["あいだ", "ま"],
+          "reading_note": "ま is the kun reading meaning 'room/space'"
+        }
+      ],
+      "classification": "juubako",
+      "phonetic_changes": [],
+      "phonetic_change_detail": null,
+      "difficulty": 2,
+      "difficulty_rationale": "間 as ま vs カン is a key disambiguation. The 'room' meaning triggers kun reading.",
+      "real_world_context": "Traditional houses, ryokan. '客間にお通しください.' Architecture and hospitality vocabulary.",
+      "trap_note": "The 間=ま (room) pattern extends to 茶間, 居間, 床の間. When 間 means 'room/space,' it's usually ま (kun). When it means 'interval/between,' it's usually カン (on). This semantic split is genuinely useful for prediction."
+    },
+
+    {
+      "id": "juubako_05",
+      "compound": "毎朝",
+      "reading": "まいあさ",
+      "characters": [
+        {
+          "kanji": "毎",
+          "reading_in_compound": "まい",
+          "reading_type": "on",
+          "on_readings": ["マイ"],
+          "kun_readings": ["ごと"],
+          "reading_note": null
+        },
+        {
+          "kanji": "朝",
+          "reading_in_compound": "あさ",
+          "reading_type": "kun",
+          "on_readings": ["チョウ"],
+          "kun_readings": ["あさ"],
+          "reading_note": null
+        }
+      ],
+      "classification": "juubako",
+      "phonetic_changes": [],
+      "phonetic_change_detail": null,
+      "difficulty": 2,
+      "difficulty_rationale": "Interesting because 毎+time-word creates a mini-system: 毎朝(まいあさ), 毎晩(まいばん), 毎日(まいにち). Classification varies within the set.",
+      "real_world_context": "Daily routine discussions. '毎朝6時に起きる.'",
+      "trap_note": "毎朝 is 重箱 (on+kun), but 毎日 is 音音 (マイ+ニチ), and 毎晩 is 音音 (マイ+バン). Same prefix, different classifications depending on whether the second element uses on or kun. Good drill material for showing classification isn't about the word — it's about each character's reading."
+    },
+
+    {
+      "id": "juubako_06",
+      "compound": "献立",
+      "reading": "こんだて",
+      "characters": [
+        {
+          "kanji": "献",
+          "reading_in_compound": "こん",
+          "reading_type": "on",
+          "on_readings": ["ケン", "コン"],
+          "kun_readings": ["たてまつる"],
+          "reading_note": "コン is the less common on reading (呉音). Most learners know only ケン."
+        },
+        {
+          "kanji": "立",
+          "reading_in_compound": "だて",
+          "reading_type": "kun",
+          "on_readings": ["リツ", "リュウ"],
+          "kun_readings": ["たつ", "たてる"],
+          "reading_note": "たて → だて via 連濁"
+        }
+      ],
+      "classification": "juubako",
+      "phonetic_changes": ["rendaku"],
+      "phonetic_change_detail": "たて → だて (連濁)",
+      "difficulty": 3,
+      "difficulty_rationale": "献 as コン is unexpected. Most learners try けんだて or けんりつ.",
+      "real_world_context": "Restaurants, meal planning. '本日の献立' — today's menu. Also school lunch menus, hospital meal plans.",
+      "trap_note": "This is a genuine stumbling block. The コン reading of 献 is basically only alive in this compound. Useful for teaching that some readings are 'fossil' readings — they survive in specific words even though they're not productive anymore."
+    },
+
+    {
+      "id": "juubako_07",
+      "compound": "額縁",
+      "reading": "がくぶち",
+      "characters": [
+        {
+          "kanji": "額",
+          "reading_in_compound": "がく",
+          "reading_type": "on",
+          "on_readings": ["ガク"],
+          "kun_readings": ["ひたい"],
+          "reading_note": null
+        },
+        {
+          "kanji": "縁",
+          "reading_in_compound": "ぶち",
+          "reading_type": "kun",
+          "on_readings": ["エン"],
+          "kun_readings": ["ふち", "へり"],
+          "reading_note": "ふち → ぶち via 連濁. ふち='edge/rim' is the relevant kun reading."
+        }
+      ],
+      "classification": "juubako",
+      "phonetic_changes": ["rendaku"],
+      "phonetic_change_detail": "ふち → ぶち (連濁)",
+      "difficulty": 2,
+      "difficulty_rationale": "縁 as ふち (not えん) is the key. Learners who only know エン will misclassify this as 音音.",
+      "real_world_context": "Art galleries, home décor, framing shops. '額縁に入れてもらえますか.'",
+      "trap_note": "Learners often know 縁=エン (fate/connection) but not ふち (edge/border). Different meaning, different reading. This illustrates why you need to know *which* meaning is active, not just which character is present."
+    },
+
+    {
+      "id": "juubako_08",
+      "compound": "仕事",
+      "reading": "しごと",
+      "characters": [
+        {
+          "kanji": "仕",
+          "reading_in_compound": "し",
+          "reading_type": "on",
+          "on_readings": ["シ", "ジ"],
+          "kun_readings": ["つかえる"],
+          "reading_note": "し is the on reading (シ). Learners sometimes think it's kun because しごと 'feels' native."
+        },
+        {
+          "kanji": "事",
+          "reading_in_compound": "ごと",
+          "reading_type": "kun",
+          "on_readings": ["ジ", "ズ"],
+          "kun_readings": ["こと"],
+          "reading_note": "こと → ごと via 連濁"
+        }
+      ],
+      "classification": "juubako",
+      "phonetic_changes": ["rendaku"],
+      "phonetic_change_detail": "こと → ごと (連濁)",
+      "difficulty": 2,
+      "difficulty_rationale": "Misclassification trap. The word feels entirely native/kun, but 仕 is using its on reading. Tests whether learners verify each character independently.",
+      "real_world_context": "Universal — work, occupation. '仕事は何ですか.'",
+      "trap_note": "This is a calibration entry. If a learner classifies this as 訓訓 'because it feels Japanese,' they're using intuition rather than analysis. The tool should catch this and reinforce the verify-each-character habit."
+    },
+
+    {
+      "id": "yutou_01",
+      "compound": "見本",
+      "reading": "みほん",
+      "characters": [
+        {
+          "kanji": "見",
+          "reading_in_compound": "み",
+          "reading_type": "kun",
+          "on_readings": ["ケン"],
+          "kun_readings": ["みる", "み"],
+          "reading_note": null
+        },
+        {
+          "kanji": "本",
+          "reading_in_compound": "ほん",
+          "reading_type": "on",
+          "on_readings": ["ホン"],
+          "kun_readings": ["もと"],
+          "reading_note": null
+        }
+      ],
+      "classification": "yutou",
+      "phonetic_changes": [],
+      "phonetic_change_detail": null,
+      "difficulty": 1,
+      "difficulty_rationale": "Clean anchor for 湯桶読み. Common word, unambiguous classification.",
+      "real_world_context": "Trade shows, retail, business — 見本市 (trade fair), 見本品 (sample product). '見本をお見せします.'",
+      "trap_note": null
+    },
+
+    {
+      "id": "yutou_02",
+      "compound": "夕刊",
+      "reading": "ゆうかん",
+      "characters": [
+        {
+          "kanji": "夕",
+          "reading_in_compound": "ゆう",
+          "reading_type": "kun",
+          "on_readings": ["セキ"],
+          "kun_readings": ["ゆう"],
+          "reading_note": "ゆう is kun. The on reading セキ is rare (七夕=たなばた is irregular, not a counter-example)."
+        },
+        {
+          "kanji": "刊",
+          "reading_in_compound": "かん",
+          "reading_type": "on",
+          "on_readings": ["カン"],
+          "kun_readings": [],
+          "reading_note": null
+        }
+      ],
+      "classification": "yutou",
+      "phonetic_changes": [],
+      "phonetic_change_detail": null,
+      "difficulty": 2,
+      "difficulty_rationale": "Learners who think ゆう is on (confusing it with 有, 友, 優 etc.) will misclassify this as 音音.",
+      "real_world_context": "Newspaper reading, convenience stores. Pair with 朝刊(ちょうかん, 音音) for a nice contrast drill.",
+      "trap_note": "夕刊 is 湯桶 (kun+on) while 朝刊 is 音音 (チョウ+カン). Same structure, different classification — because 夕 uses kun while 朝 uses on. Excellent drill pair."
+    },
+
+    {
+      "id": "yutou_03",
+      "compound": "雨具",
+      "reading": "あまぐ",
+      "characters": [
+        {
+          "kanji": "雨",
+          "reading_in_compound": "あま",
+          "reading_type": "kun",
+          "on_readings": ["ウ"],
+          "kun_readings": ["あめ", "あま"],
+          "reading_note": "あま is the compositional kun form (same pattern as 雨戸)."
+        },
+        {
+          "kanji": "具",
+          "reading_in_compound": "ぐ",
+          "reading_type": "on",
+          "on_readings": ["グ"],
+          "kun_readings": [],
+          "reading_note": "Voiced from ク via sequential voicing (連濁-like but within on reading context)."
+        }
+      ],
+      "classification": "yutou",
+      "phonetic_changes": ["rendaku"],
+      "phonetic_change_detail": "グ is technically the standard on reading (already voiced), but the voicing reinforces the compound boundary.",
+      "difficulty": 2,
+      "difficulty_rationale": "Tests the 雨=あま pattern from 雨戸 in a different classification context. Cross-references reinforce learning.",
+      "real_world_context": "Travel preparation, outdoor activities. '雨具を持っていったほうがいい.'",
+      "trap_note": "If a learner already learned あま from 雨戸 (kun_kun), encountering it here in a 湯桶 compound reinforces that あま is about the character (雨's compositional kun form), not about the compound type."
+    },
+
+    {
+      "id": "yutou_04",
+      "compound": "身分",
+      "reading": "みぶん",
+      "characters": [
+        {
+          "kanji": "身",
+          "reading_in_compound": "み",
+          "reading_type": "kun",
+          "on_readings": ["シン"],
+          "kun_readings": ["み"],
+          "reading_note": null
+        },
+        {
+          "kanji": "分",
+          "reading_in_compound": "ぶん",
+          "reading_type": "on",
+          "on_readings": ["ブン", "フン", "ブ"],
+          "kun_readings": ["わける", "わかる"],
+          "reading_note": null
+        }
+      ],
+      "classification": "yutou",
+      "phonetic_changes": [],
+      "phonetic_change_detail": null,
+      "difficulty": 2,
+      "difficulty_rationale": "身 as み vs シン is the decision point. Most learners handle this correctly by instinct but may not consciously classify it.",
+      "real_world_context": "ID documents, social register. '身分証明書をお持ちですか.' Official/bureaucratic situations.",
+      "trap_note": "身分証明書 extends this — the full four-character compound is (湯桶)(音音)(音), showing how classification applies recursively to compound words built from sub-compounds."
+    },
+
+    {
+      "id": "yutou_05",
+      "compound": "場所",
+      "reading": "ばしょ",
+      "characters": [
+        {
+          "kanji": "場",
+          "reading_in_compound": "ば",
+          "reading_type": "kun",
+          "on_readings": ["ジョウ"],
+          "kun_readings": ["ば"],
+          "reading_note": "ば is kun. Learners sometimes think ば is on because it's so common in compound-like words."
+        },
+        {
+          "kanji": "所",
+          "reading_in_compound": "しょ",
+          "reading_type": "on",
+          "on_readings": ["ショ"],
+          "kun_readings": ["ところ"],
+          "reading_note": null
+        }
+      ],
+      "classification": "yutou",
+      "phonetic_changes": [],
+      "phonetic_change_detail": null,
+      "difficulty": 2,
+      "difficulty_rationale": "Surprising classification. Most learners use this word daily without realizing it's 湯桶読み. Good 'aha moment' entry.",
+      "real_world_context": "Ubiquitous — location, place. '場所はどこですか.'",
+      "trap_note": "場 on reading is ジョウ (as in 入場, 場面). The short ば is kun. Many learners assume short, common readings must be on. This entry challenges that assumption directly."
+    },
+
+    {
+      "id": "yutou_06",
+      "compound": "消印",
+      "reading": "けしいん",
+      "characters": [
+        {
+          "kanji": "消",
+          "reading_in_compound": "けし",
+          "reading_type": "kun",
+          "on_readings": ["ショウ"],
+          "kun_readings": ["きえる", "けす"],
+          "reading_note": "けし is the 連用形 (stem form) of けす."
+        },
+        {
+          "kanji": "印",
+          "reading_in_compound": "いん",
+          "reading_type": "on",
+          "on_readings": ["イン"],
+          "kun_readings": ["しるし"],
+          "reading_note": null
+        }
+      ],
+      "classification": "yutou",
+      "phonetic_changes": [],
+      "phonetic_change_detail": null,
+      "difficulty": 2,
+      "difficulty_rationale": "Tests recognition of verb stem forms as kun readings in compounds. The 連用形 pattern is productive.",
+      "real_world_context": "Post office, mail. '消印有効' on application deadlines. Matters when submitting documents by mail.",
+      "trap_note": "The 連用形+on pattern appears in many 湯桶 compounds: 消印, 割引(わりびき — though 引 as びき could be argued either way). Recognizing verb stems as kun elements is a transferable skill."
+    },
+
+    {
+      "id": "jukujikun_01",
+      "compound": "大人",
+      "reading": "おとな",
+      "characters": [
+        {
+          "kanji": "大",
+          "reading_in_compound": "おと",
+          "reading_type": "neither",
+          "on_readings": ["ダイ", "タイ"],
+          "kun_readings": ["おおきい", "おお"],
+          "reading_note": "おと is NOT a standard reading of 大. This is a 熟字訓 — the reading applies to the whole compound, not individual characters."
+        },
+        {
+          "kanji": "人",
+          "reading_in_compound": "な",
+          "reading_type": "neither",
+          "on_readings": ["ジン", "ニン"],
+          "kun_readings": ["ひと"],
+          "reading_note": "な is NOT a standard reading of 人. Reading cannot be decomposed by character."
+        }
+      ],
+      "classification": "jukujikun",
+      "phonetic_changes": [],
+      "phonetic_change_detail": null,
+      "difficulty": 4,
+      "difficulty_rationale": "Framework-breaker. The four-category system cannot classify this. 熟字訓 is a whole-word reading that doesn't decompose.",
+      "real_world_context": "Ubiquitous — adult. '大人1枚' at ticket counters. Also read as たいじん or だいにん in classical/formal contexts.",
+      "trap_note": "This entry exists to honestly show where the framework fails. 大人=おとな cannot be predicted from readings of 大 or 人. The tool needs a 'this is 熟字訓, learn it as a unit' category. If the system only has four categories, it will mishandle a significant chunk of common vocabulary."
+    },
+
+    {
+      "id": "jukujikun_02",
+      "compound": "昨日",
+      "reading": "きのう",
+      "characters": [
+        {
+          "kanji": "昨",
+          "reading_in_compound": "き",
+          "reading_type": "neither",
+          "on_readings": ["サク"],
+          "kun_readings": [],
+          "reading_note": "き is not a standard reading of 昨. This is 熟字訓."
+        },
+        {
+          "kanji": "日",
+          "reading_in_compound": "のう",
+          "reading_type": "neither",
+          "on_readings": ["ニチ", "ジツ"],
+          "kun_readings": ["ひ", "か"],
+          "reading_note": "のう is not a standard reading of 日. Reading is whole-word."
+        }
+      ],
+      "classification": "jukujikun",
+      "phonetic_changes": [],
+      "phonetic_change_detail": null,
+      "difficulty": 4,
+      "difficulty_rationale": "Another essential framework-breaker. Everyone knows this word, but it cannot be derived from character readings.",
+      "real_world_context": "Daily conversation. Also read as さくじつ (音音) in formal contexts — which IS classifiable. Good for showing that the same compound can have both a 熟字訓 and a regular reading.",
+      "trap_note": "昨日 has two readings: きのう (熟字訓, conversational) and さくじつ (音音, formal/written). This dual-reading pattern also applies to 今日(きょう/こんにち) and 明日(あした/あす/みょうにち). The tool should handle these as multi-reading entries where one reading is classifiable and one isn't."
+    }
+  ]
+}
