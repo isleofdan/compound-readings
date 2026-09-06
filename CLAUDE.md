@@ -18,9 +18,10 @@ the wild — menus, business documents, signage, place names. This tool is for
 closing the gap between "I know this" and "I read it without stopping."
 
 The first user is Dan, and design decisions are made for his profile below. The
-app may later be offered to other N1+ learners. Therefore: **no path, storage key,
-identifier, or data shape may assume there is only one user.** Progress and state
-are keyed under a user identifier from the first line of persistence code, even
+app may later be offered to other N1+ learners. Therefore:
+**no path, storage key, identifier, or data shape may assume there is only one user.**
+Progress and state are keyed under a user identifier from the first line of
+persistence code, even
 while that identifier is a single locally generated value. Accounts, payments,
 sync, and multi-user storage are out of scope until Dan says otherwise — this rule
 exists so they are never foreclosed, not so they get built early. Do not add
