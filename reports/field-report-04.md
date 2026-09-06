@@ -98,7 +98,11 @@ https://isleofdan.github.io/compound-readings/
 
 Tell me which items did not hold — and the question that matters: **was the miss-cause line useful, or noise?**
 
+### Result, 2026-09-06
+
+Walked with Dan on his phone, one item per message. All four items held. 分類: "so far so good" — twenty drills, layout intact, every wrong answer explained. 予想: "seems solid" — ten predictions including a variant reading, accepted as 別読みで正解. The miss-cause line: **"for now I'll say useful"** — accepted, with the "for now" recorded; a longer run may change it, and Phase 2's per-entry record of causes will show whether it earns its place. Nothing asked him to come back, no streak, no percentage: no. **Phase 1's Android checkpoint is passed**; Session 5 (Phase 2, persistence keyed by user identifier) is cleared to run once the study project's cargo answers are applied.
+
 ## Deploys
 
 - **Run 17** (https://github.com/isleofdan/compound-readings/actions/runs/34023214878), `main` at `d1faeac` ("Add session 4 screenshots"): build and deploy both passed; the build log archived `assets/index-0c0lKk35.js` and `assets/index-B4WszdAl.css` — the local build's names at that commit, byte for byte the same bundles. The proxy still blocks `isleofdan.github.io` and the artifact host, so the log is the check.
-- **Run 18** carries this close-out (Markdown only); with the Tailwind scan restricted to `src/` and `index.html`, its asset names are expected to equal run 17's. Its result is stated in the chat close-out.
+- **Run 18** (https://github.com/isleofdan/compound-readings/actions/runs/34023338094), the close-out commit (Markdown only): build passed and archived the same two asset names as run 17, `index-0c0lKk35.js` and `index-B4WszdAl.css` — the restricted Tailwind scan holds.
