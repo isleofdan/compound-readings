@@ -90,3 +90,7 @@ https://isleofdan.github.io/compound-readings/
 6. All of it one-handed, without zooming, with the buttons at the bottom within reach of your thumb.
 
 Tell me which items did not hold — and the one question that matters: **would you do the 場 chain again tomorrow?**
+
+### Result, 2026-09-06
+
+Walked with Dan on his phone, one item per message. All six items held. Dan first opened the 手 search on the Browse tab instead of the 手 tile on the Chains tab and asked where the Exception label was — the walkthrough wording should say "the 鎖 tab, bottom left, then the 手 tile" on the first step, and the next brief's checkpoint text should too. Once on the chain: "yes, big red exception tag". 場: the shift lands and 場所 is the payoff. 夕: 湯桶 on 夕食 and 夕飯, rule holds. 施行: three readings, none marked correct. One-handed, no zoom: yes. **Would he do the 場 chain again tomorrow: yes.** Phase 1's first-half checkpoint is passed; Session 4 (Classification Drill and Prediction Challenge) is cleared to run.
