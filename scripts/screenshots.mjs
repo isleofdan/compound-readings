@@ -24,18 +24,12 @@ const VIEWPORTS = {
 
 // ---------------------------------------------------------------- shot lists
 
-/** Click every visible button with the given exact text, one at a time. */
+/** Click the nth button whose accessible name starts with the given text. */
 const click = (text, nth = 0) => async (page) => {
-  await page.getByRole("button", { name: text, exact: true }).nth(nth).click();
+  await page.getByRole("button", { name: new RegExp("^" + text) }).nth(nth).click();
 };
 const scrollBottom = () => async (page) => {
   await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
-};
-const fill = (placeholder, value) => async (page) => {
-  await page.getByPlaceholder(placeholder).fill(value);
-};
-const pressEnter = () => async (page) => {
-  await page.keyboard.press("Enter");
 };
 
 /**
@@ -48,7 +42,7 @@ const pressEnter = () => async (page) => {
  */
 const answerDrill = (want) => async (page) => {
   for (let i = 0; i < 400; i++) {
-    await page.getByRole("button", { name: "音音", exact: true }).click();
+    await page.getByRole("button", { name: "音音" }).first().click();
     const banner = await page.locator("[data-outcome]").getAttribute("data-outcome");
     if (banner === want) return;
     await page.getByRole("button", { name: "次へ", exact: true }).click();
@@ -95,13 +89,13 @@ const SESSION_3 = [
 const SESSION_4 = [
   ...SESSION_3,
   { name: "drill", hash: "#/drill" },
-  { name: "drill-filter-yutou", hash: "#/drill?cls=yutou", steps: [click("絞り込み")] },
+  { name: "drill-filter-yutou", hash: "#/drill?cls=yutou" },
   { name: "drill-correct", hash: "#/drill", steps: [answerDrill("correct")] },
   { name: "drill-correct-bottom", hash: "#/drill", steps: [answerDrill("correct"), scrollBottom()] },
   { name: "drill-wrong", hash: "#/drill", steps: [answerDrill("wrong")] },
   { name: "drill-wrong-bottom", hash: "#/drill", steps: [answerDrill("wrong"), scrollBottom()] },
   { name: "predict", hash: "#/predict" },
-  { name: "predict-filter-rendaku", hash: "#/predict?pc=rendaku", steps: [click("絞り込み")] },
+  { name: "predict-filter-rendaku", hash: "#/predict?pc=rendaku" },
   { name: "predict-miss", hash: "#/predict", steps: [predictAnswer("x")] },
   { name: "predict-施行-せこう", hash: "#/predict", steps: [findPredict("施行", "せこう")] },
   { name: "predict-施行-せこう-bottom", hash: "#/predict", steps: [findPredict("施行", "せこう"), scrollBottom()] },
