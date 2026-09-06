@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "npm run validate && tsc --noEmit && vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "validate": "node -e \"console.log('validator not yet written (Phase 0.6)')\"",
+    "validate": "tsx scripts/validate.ts",
     "audit": "tsx scripts/audit.ts",
     "consolidate": "tsx scripts/consolidate.ts"
   },
