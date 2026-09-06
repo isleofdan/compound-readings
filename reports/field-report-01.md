@@ -44,7 +44,7 @@ Facts the next brief must carry, each computed from the files.
 - **No `.gitkeep` in `scripts/`**: the folder holds `source-count.ts`, its test, and `audit.ts`.
 - **The page paints its own white background and light color scheme.** The first render in a dark-themed viewer showed near-black text on a near-black ground. DO NOT REVERSE.
 - **`npm run build` runs the TypeScript checker first**, so a type error in `src/` or `scripts/` fails the build. `tsx` is a dev dependency and `npm run audit` is a script, so the audit runs the same way locally and in the cloud.
-- **The workflow was committed although Pages could not be enabled.** Every push now produces a failed run (build green, deploy red) until Pages is on; GitHub may email Dan about each. Committing it was the only way to prove the build half of the path and to leave the next session nothing to write.
+- **The workflow was committed before Pages could be enabled.** The three pushes made in between each produced a failed run (build green, deploy red), so GitHub may have emailed Dan about them. Once Pages was enabled the failed run was re-run and passed, and every push since has deployed green.
 - **One extra commit** ("Keep the multi-user rule sentence on one line"): my first wrap of the §1 paragraph split the required phrase across two lines, which would have failed the brief's own verification.
 - **Batch 2 and 3 rows in `BUILD_PLAN.md` were upgraded from [T] to [V]** although they were confirmed, not contradicted. Leaving confirmed numbers marked unverified after an audit seemed worse than the strict reading of the rule.
 - **The audit separates two kinds of derivation mismatch** (stale field vs `irregular` classification) rather than reporting one number, because they need different fixes.
