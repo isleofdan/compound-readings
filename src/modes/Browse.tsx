@@ -6,6 +6,7 @@ import type { Classification, PhoneticChange } from "../data/schema";
 import type { BrowseRoute, Navigate } from "../router";
 import { Badge } from "../ui/Badge";
 import { Chip } from "../ui/Chip";
+import { ContestedReadings } from "../ui/ContestedReadings";
 
 // Browse — the Phase 0 data-inspection page (Session 2), unchanged in behavior:
 // search by character, five classification chips and six phonetic-change
@@ -56,26 +57,7 @@ function EntryRow({ e, open, onToggle }: { e: CompactEntry; open: boolean; onTog
             <span className="font-semibold">Phonetic changes:</span> {e.changes.length ? e.changes.map((p) => PHONETIC_CHANGE_LABELS[p]).join(", ") : "none"}
             {e.changeDetail && <span className="text-neutral-700"> — {e.changeDetail}</span>}
           </p>
-          {e.alternates.length > 0 && (
-            <div>
-              <div className="font-semibold">Alternate readings</div>
-              <ul className="space-y-1">
-                {e.alternates.map((a, i) => (
-                  <li key={i} className="flex flex-wrap items-center gap-1.5">
-                    <span className="text-base">{a.reading}</span>
-                    <Badge cls={a.cls} small />
-                    <code className="rounded bg-neutral-100 px-1 text-xs">{a.status}</code>
-                    <span className="w-full text-neutral-700">{a.context}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-          {e.contested && (
-            <p className="rounded border-l-4 border-orange-600 bg-orange-50 px-2 py-1">
-              <span className="font-semibold">Contested:</span> {e.contestedNote}
-            </p>
-          )}
+          <ContestedReadings e={e} />
           <p>
             <span className="font-semibold">Context:</span> {e.context}
           </p>

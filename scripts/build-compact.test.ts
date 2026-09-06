@@ -46,6 +46,7 @@ describe("compact transform round-trip", () => {
         expect(a.cls).toBe(s.classification);
         expect(a.status).toBe(s.status);
         expect(a.context).toBe(s.context);
+        expect(a.sourceStatus).toBe(s.source_status);
       });
     });
   });
@@ -68,10 +69,9 @@ describe("compact transform round-trip", () => {
         contested_note: c.contestedNote,
         tags: c.tags,
         characters: c.chars.map((ch) => ({ kanji: ch.k, reading_in_compound: ch.r, reading_type: ch.t, on_readings: ch.on, kun_readings: ch.kun, reading_note: ch.note })),
-        alternate_readings: c.alternates.map((a) => ({ reading: a.reading, classification: a.cls, status: a.status, context: a.context })),
+        alternate_readings: c.alternates.map((a) => ({ reading: a.reading, classification: a.cls, status: a.status, context: a.context, source_status: a.sourceStatus })),
       };
-      const { source_id: _s, source_batch: _b, char_count: _cc, has_kana: _hk, decomposable: _d, difficulty_rationale: _dr, ...rest } = e;
-      const expected = { ...rest, alternate_readings: e.alternate_readings.map(({ source_status: _ss, ...a }) => a) };
+      const { source_id: _s, source_batch: _b, char_count: _cc, has_kana: _hk, decomposable: _d, difficulty_rationale: _dr, ...expected } = e;
       expect(back).toEqual(expected);
     }
   });

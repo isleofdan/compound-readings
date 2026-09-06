@@ -4,12 +4,12 @@
 // gitignored, regenerated on every build, and marked "$generated": true.
 //
 // Fields per §4.4: id, compound, reading, chars[] {k, r, t}, cls, diff,
-// changes, changeDetail, context, trap, chains[], alternates[]. Additive fields
-// beyond §4.4, each derived one-to-one from a canonical field so the round-trip
-// test covers them: chars[].on / .kun / .note (the character's dictionary
-// readings and note), contested, contestedNote, tags, unclassifiable. The
-// inspection page and the Phase 1 modes need them; the prototype's schema had
-// no slot for them.
+// changes, changeDetail, context, trap, chains[], alternates[] {reading, cls,
+// status, context, sourceStatus}, contested, contestedNote, tags. chars[].on /
+// .kun / .note, alternates[].sourceStatus, contested, contestedNote and tags are
+// additive beyond the prototype's schema, each derived one-to-one from a
+// canonical field so the round-trip test covers them; the inspection page and
+// the Phase 1 modes need them.
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { DatasetSchema, type Entry } from "../src/data/schema";
@@ -34,7 +34,7 @@ export function toCompact(e: Entry): CompactEntry {
     context: e.real_world_context,
     trap: e.trap_note,
     chains: e.chains,
-    alternates: e.alternate_readings.map((a) => ({ reading: a.reading, cls: a.classification, status: a.status, context: a.context })),
+    alternates: e.alternate_readings.map((a) => ({ reading: a.reading, cls: a.classification, status: a.status, context: a.context, sourceStatus: a.source_status })),
     contested: e.contested,
     contestedNote: e.contested_note,
     tags: e.tags,

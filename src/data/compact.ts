@@ -4,7 +4,7 @@
 import type { AlternateStatus, Classification, PhoneticChange, ReadingType } from "./schema";
 
 export type CompactChar = { k: string; r: string | null; t: ReadingType; on: string[]; kun: string[]; note: string | null };
-export type CompactAlternate = { reading: string; cls: Classification; status: AlternateStatus; context: string };
+export type CompactAlternate = { reading: string; cls: Classification; status: AlternateStatus; context: string; sourceStatus: string };
 export type CompactEntry = {
   id: string;
   compound: string;

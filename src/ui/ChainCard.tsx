@@ -2,6 +2,7 @@ import type { CompactEntry } from "../data/compact";
 import { displayReadingTypes } from "../data/index";
 import { EXCEPTION_LABEL, PHONETIC_CHANGE_LABELS } from "../data/labels";
 import { Badge } from "./Badge";
+import { ContestedReadings } from "./ContestedReadings";
 
 // One entry in a chain (ported from the prototype's EntryCard). Before the tap:
 // compound, reading, context — the learner proposes the classification first
@@ -67,26 +68,7 @@ export function ChainCard({ e, revealed, exception, onReveal }: { e: CompactEntr
               {e.changeDetail && <> — {e.changeDetail}</>}
             </p>
           )}
-          {e.alternates.length > 0 && (
-            <div>
-              <div className="font-semibold">Alternate readings</div>
-              <ul className="space-y-1">
-                {e.alternates.map((a, i) => (
-                  <li key={i} className="flex flex-wrap items-center gap-1.5">
-                    <span className="text-base">{a.reading}</span>
-                    <Badge cls={a.cls} small />
-                    <code className="rounded bg-neutral-100 px-1 text-xs">{a.status}</code>
-                    <span className="w-full text-neutral-700">{a.context}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-          {e.contested && (
-            <p className="rounded border-l-4 border-orange-600 bg-orange-50 px-2 py-1">
-              <span className="font-semibold">Contested:</span> {e.contestedNote}
-            </p>
-          )}
+          <ContestedReadings e={e} />
           {e.trap && (
             <p className="rounded border-l-4 border-yellow-600 bg-yellow-50 px-2 py-1">
               <span className="font-semibold">Trap:</span> {e.trap}

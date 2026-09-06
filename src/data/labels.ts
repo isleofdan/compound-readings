@@ -2,7 +2,7 @@
 // ASCII identifiers (CLAUDE.md §8); the UI shows the Japanese terms. Nothing
 // else in the repo may define these strings.
 
-import type { Classification, PhoneticChange, RuleReliability } from "./schema";
+import type { AlternateStatus, Classification, PhoneticChange, RuleReliability } from "./schema";
 
 export const CLASSIFICATION_ORDER: readonly Classification[] = [
   "on_on",
@@ -62,3 +62,15 @@ export const RELIABILITY_LABELS: Record<RuleReliability, string> = {
 };
 
 export const EXCEPTION_LABEL = "Exception";
+
+// DATA_SPEC.md §7.3 — how an alternate reading's status is labeled in the UI.
+// No label says "correct" or "wrong": contested readings are shown with their
+// status, never collapsed to one answer (CLAUDE.md §3.3).
+export const ALTERNATE_STATUS_LABELS: Record<AlternateStatus, string> = {
+  standard: "standard",
+  variant_accepted: "variant · accepted",
+  variant_spreading: "variant · spreading",
+  prescriptive_only: "prescribed, rare in use",
+  disputed: "disputed",
+  nonstandard: "nonstandard",
+};
