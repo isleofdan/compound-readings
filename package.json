@@ -5,12 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run validate && tsc --noEmit && vite build",
+    "build": "npm run validate && npm run build:compact && npm run build:index && tsc --noEmit && vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "validate": "tsx scripts/validate.ts",
     "audit": "tsx scripts/audit.ts",
-    "consolidate": "tsx scripts/consolidate.ts"
+    "consolidate": "tsx scripts/consolidate.ts",
+    "build:compact": "tsx scripts/build-compact.ts",
+    "build:index": "tsx scripts/build-index.ts"
   },
   "dependencies": {
     "react": "^19.1.0",
