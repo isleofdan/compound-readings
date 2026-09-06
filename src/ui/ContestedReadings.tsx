@@ -1,5 +1,5 @@
 import type { CompactEntry } from "../data/compact";
-import { ALTERNATE_STATUS_LABELS } from "../data/labels";
+import { ALTERNATE_STATUS_LABELS, UI_LABELS } from "../data/labels";
 import { Badge } from "./Badge";
 
 // Contested-reading display (BUILD_PLAN.md 1.6; CLAUDE.md §3.3). Shared by the
@@ -14,7 +14,7 @@ export function ContestedReadings({ e }: { e: CompactEntry }) {
     <div className="space-y-2 text-sm">
       {e.alternates.length > 0 && (
         <div>
-          <div className="font-semibold">Also read</div>
+          <div className="font-semibold">{UI_LABELS.alsoRead}</div>
           <ul className="mt-1 space-y-2">
             {e.alternates.map((a, i) => (
               <li key={i} className="rounded-lg bg-neutral-50 px-2 py-1.5">
@@ -23,7 +23,7 @@ export function ContestedReadings({ e }: { e: CompactEntry }) {
                   <Badge cls={a.cls} small />
                   <span className="rounded border border-neutral-400 px-1.5 py-0.5 text-xs font-semibold text-neutral-800">{ALTERNATE_STATUS_LABELS[a.status]}</span>
                 </div>
-                <div className="mt-0.5 text-xs text-neutral-600">source: {a.sourceStatus}</div>
+                <div className="mt-0.5 text-xs text-neutral-600">{UI_LABELS.source}: {a.sourceStatus}</div>
                 <div className="mt-0.5 text-neutral-800">{a.context}</div>
               </li>
             ))}
@@ -32,7 +32,7 @@ export function ContestedReadings({ e }: { e: CompactEntry }) {
       )}
       {e.contested && e.contestedNote && (
         <p className="rounded border-l-4 border-orange-600 bg-orange-50 px-2 py-1">
-          <span className="font-semibold">Contested:</span> {e.contestedNote}
+          <span className="font-semibold">{UI_LABELS.contested}:</span> {e.contestedNote}
         </p>
       )}
     </div>

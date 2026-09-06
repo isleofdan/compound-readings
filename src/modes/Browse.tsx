@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import type { CompactEntry } from "../data/compact";
 import { ENTRIES, classificationCounts, imbalanceSentence, matchesSearch } from "../data/index";
-import { CLASSIFICATION_LABELS, CLASSIFICATION_ORDER, PHONETIC_CHANGE_LABELS, PHONETIC_CHANGE_ORDER, READING_TYPE_LABELS } from "../data/labels";
+import { CLASSIFICATION_LABELS, CLASSIFICATION_ORDER, PHONETIC_CHANGE_LABELS, PHONETIC_CHANGE_ORDER, READING_TYPE_LABELS, UI_LABELS } from "../data/labels";
 import type { Classification, PhoneticChange } from "../data/schema";
 import type { BrowseRoute, Navigate } from "../router";
 import { Badge } from "../ui/Badge";
@@ -54,22 +54,22 @@ function EntryRow({ e, open, onToggle }: { e: CompactEntry; open: boolean; onTog
             </ul>
           )}
           <p>
-            <span className="font-semibold">Phonetic changes:</span> {e.changes.length ? e.changes.map((p) => PHONETIC_CHANGE_LABELS[p]).join(", ") : "none"}
+            <span className="font-semibold">{UI_LABELS.phoneticChanges}:</span> {e.changes.length ? e.changes.map((p) => PHONETIC_CHANGE_LABELS[p]).join(", ") : UI_LABELS.none}
             {e.changeDetail && <span className="text-neutral-700"> — {e.changeDetail}</span>}
           </p>
           <ContestedReadings e={e} />
           <p>
-            <span className="font-semibold">Context:</span> {e.context}
+            <span className="font-semibold">{UI_LABELS.context}:</span> {e.context}
           </p>
           {e.trap && (
             <p className="rounded border-l-4 border-yellow-600 bg-yellow-50 px-2 py-1">
-              <span className="font-semibold">Trap:</span> {e.trap}
+              <span className="font-semibold">{UI_LABELS.trap}:</span> {e.trap}
             </p>
           )}
           <p className="text-neutral-700">
-            <span className="font-semibold text-neutral-900">Tags:</span> {e.tags.length ? e.tags.join(", ") : "none"} ·{" "}
-            <span className="font-semibold text-neutral-900">Chains:</span> {e.chains.length ? e.chains.join(" ") : "none"} ·{" "}
-            <span className="font-semibold text-neutral-900">Difficulty:</span> {e.diff} · <span className="text-neutral-500">{e.id}</span>
+            <span className="font-semibold text-neutral-900">{UI_LABELS.tags}:</span> {e.tags.length ? e.tags.join(", ") : UI_LABELS.none} ·{" "}
+            <span className="font-semibold text-neutral-900">{UI_LABELS.chains}:</span> {e.chains.length ? e.chains.join(" ") : UI_LABELS.none} ·{" "}
+            <span className="font-semibold text-neutral-900">{UI_LABELS.difficulty}:</span> {e.diff} · <span className="text-neutral-500">{e.id}</span>
           </p>
         </div>
       )}
@@ -92,7 +92,7 @@ export function Browse({ route, navigate }: { route: BrowseRoute; navigate: Navi
       <header className="pt-4">
         <h1 className="text-xl font-bold">複合語の読み — Browse</h1>
         <p className="mt-1 text-sm">
-          <span className="font-semibold">{ENTRIES.length} entries</span> ·{" "}
+          <span className="font-semibold">{UI_LABELS.entries(ENTRIES.length)}</span> ·{" "}
           {CLASSIFICATION_ORDER.map((c) => `${CLASSIFICATION_LABELS[c]} ${counts[c]}`).join(" · ")}
         </p>
         <p className="mt-1 text-sm text-neutral-700">{imbalanceSentence()}</p>
@@ -125,7 +125,7 @@ export function Browse({ route, navigate }: { route: BrowseRoute; navigate: Navi
           ))}
         </div>
         <p className="mt-1.5 text-xs text-neutral-600">
-          {visible.length} of {ENTRIES.length} shown
+          {UI_LABELS.shown(visible.length, ENTRIES.length)}
         </p>
       </div>
 

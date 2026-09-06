@@ -1,6 +1,6 @@
 import type { CompactEntry } from "../data/compact";
 import { displayReadingTypes } from "../data/index";
-import { EXCEPTION_LABEL, PHONETIC_CHANGE_LABELS } from "../data/labels";
+import { EXCEPTION_LABEL, PHONETIC_CHANGE_LABELS, UI_LABELS } from "../data/labels";
 import { Badge } from "./Badge";
 import { ContestedReadings } from "./ContestedReadings";
 
@@ -36,7 +36,7 @@ export function ChainCard({ e, revealed, exception, onReveal }: { e: CompactEntr
         <div className="mt-1 text-xl text-neutral-700">{e.reading}</div>
       </div>
       <p className="mt-2 text-sm text-neutral-700">
-        <span className="font-semibold text-neutral-900">Context:</span> {e.context}
+        <span className="font-semibold text-neutral-900">{UI_LABELS.context}:</span> {e.context}
       </p>
 
       {!revealed && (
@@ -45,7 +45,7 @@ export function ChainCard({ e, revealed, exception, onReveal }: { e: CompactEntr
           onClick={onReveal}
           className="mt-3 min-h-11 w-full rounded-xl border border-neutral-400 bg-neutral-50 text-base font-semibold text-neutral-900"
         >
-          Reveal
+          {UI_LABELS.reveal}
         </button>
       )}
 
@@ -71,7 +71,7 @@ export function ChainCard({ e, revealed, exception, onReveal }: { e: CompactEntr
           <ContestedReadings e={e} />
           {e.trap && (
             <p className="rounded border-l-4 border-yellow-600 bg-yellow-50 px-2 py-1">
-              <span className="font-semibold">Trap:</span> {e.trap}
+              <span className="font-semibold">{UI_LABELS.trap}:</span> {e.trap}
             </p>
           )}
         </div>

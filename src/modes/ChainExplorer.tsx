@@ -1,6 +1,6 @@
 import type { CompactEntry } from "../data/compact";
 import { CHAIN_BY_CHARACTER, LESSON_CHAINS, isException, isLesson, type ResolvedChain } from "../data/index";
-import { EXCEPTION_LABEL, READING_TYPE_LABELS, RELIABILITY_LABELS } from "../data/labels";
+import { EXCEPTION_LABEL, READING_TYPE_LABELS, RELIABILITY_LABELS, UI_LABELS } from "../data/labels";
 import type { ChainsRoute, Navigate } from "../router";
 import { ChainCard } from "../ui/ChainCard";
 
@@ -29,7 +29,7 @@ function ChainList({ navigate }: { navigate: Navigate }) {
               className="flex min-h-28 w-full flex-col items-start rounded-2xl border border-neutral-300 bg-white p-4 text-left shadow-sm"
             >
               <span className="text-5xl font-bold">{c.character}</span>
-              <span className="mt-2 text-sm text-neutral-700">{c.entries.length} entries</span>
+              <span className="mt-2 text-sm text-neutral-700">{UI_LABELS.entries(c.entries.length)}</span>
               <span className="text-sm font-semibold text-neutral-900">{RELIABILITY_LABELS[c.reliability]}</span>
             </button>
           </li>
@@ -68,11 +68,11 @@ function ActionRow({ onBack, revealAll, onToggleRevealAll }: { onBack: () => voi
     <div className="fixed inset-x-0 z-10 border-t border-neutral-200 bg-white/95 backdrop-blur" style={{ bottom: "calc(3.5rem + env(safe-area-inset-bottom))" }}>
       <div className="mx-auto flex max-w-md gap-2 px-3 py-2">
         <button type="button" onClick={onBack} className="min-h-11 flex-1 rounded-xl border border-neutral-400 bg-white font-semibold">
-          ← Chains
+          {UI_LABELS.backToChains}
         </button>
         {onToggleRevealAll && (
           <button type="button" onClick={onToggleRevealAll} aria-pressed={revealAll} className="min-h-11 flex-1 rounded-xl border border-neutral-400 bg-white font-semibold">
-            {revealAll ? "Hide all" : "Reveal all"}
+            {revealAll ? UI_LABELS.hideAll : UI_LABELS.revealAll}
           </button>
         )}
       </div>
@@ -121,7 +121,7 @@ function ChainScreen({ chain, state, setState, navigate }: { chain: ResolvedChai
     <div className="px-3 pt-4 text-neutral-900">
       <header className="text-center">
         <span className="text-5xl font-bold">{chain.character}</span>
-        <span className="ml-3 text-sm text-neutral-700">{chain.entries.length} entries</span>
+        <span className="ml-3 text-sm text-neutral-700">{UI_LABELS.entries(chain.entries.length)}</span>
       </header>
       <ul className="mt-4 space-y-3">
         {chain.entries.map((e) => (

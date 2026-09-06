@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { ENTRIES } from "../data/index";
-import { ALTERNATE_STATUS_LABELS } from "../data/labels";
+import { ALTERNATE_STATUS_LABELS, UI_LABELS } from "../data/labels";
 import { ContestedReadings } from "./ContestedReadings";
 
 const byCompound = (w: string) => ENTRIES.find((e) => e.compound === w)!;
@@ -15,7 +15,7 @@ describe("ContestedReadings", () => {
     expect(html).toContain(ALTERNATE_STATUS_LABELS.variant_spreading);
     expect(html).toContain(ALTERNATE_STATUS_LABELS.standard);
     expect(html).toContain("variant — widespread but prescriptively contested");
-    expect(html).toContain("Contested:");
+    expect(html).toContain(`${UI_LABELS.contested}:`);
     expect(html.toLowerCase()).not.toMatch(/correct|answer|wrong/);
   });
 
@@ -24,7 +24,7 @@ describe("ContestedReadings", () => {
     expect(html).toContain("だいがえ");
     expect(html).toContain("重箱");
     expect(html).toContain(ALTERNATE_STATUS_LABELS.variant_spreading);
-    expect(html).toContain("Contested:");
+    expect(html).toContain(`${UI_LABELS.contested}:`);
   });
 
   it("毎月: a standard alternate that changes the classification, with no contested note", () => {
@@ -32,14 +32,14 @@ describe("ContestedReadings", () => {
     expect(html).toContain("まいげつ");
     expect(html).toContain("音音");
     expect(html).toContain(ALTERNATE_STATUS_LABELS.standard);
-    expect(html).not.toContain("Contested:");
+    expect(html).not.toContain(`${UI_LABELS.contested}:`);
   });
 
   it("明日: both alternates, one 熟字訓 and one 音音", () => {
     const html = render("明日");
     expect(html).toContain("あす");
     expect(html).toContain("みょうにち");
-    expect((html.match(/source: standard/g) ?? []).length).toBe(2);
+    expect((html.match(new RegExp(`${UI_LABELS.source}: standard`, "g")) ?? []).length).toBe(2);
   });
 
   it("renders nothing for an entry with no alternates and no contested flag", () => {

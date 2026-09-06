@@ -13,7 +13,8 @@
     "consolidate": "tsx scripts/consolidate.ts",
     "build:compact": "tsx scripts/build-compact.ts",
     "build:index": "tsx scripts/build-index.ts",
-    "pretest": "tsx scripts/build-compact.ts"
+    "pretest": "tsx scripts/build-compact.ts",
+    "screenshots": "node scripts/screenshots.mjs"
   },
   "dependencies": {
     "react": "^19.1.0",
@@ -26,6 +27,7 @@
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
     "@vitejs/plugin-react": "^5.0.0",
+    "playwright-core": "^1.58.2",
     "tailwindcss": "^4.1.0",
     "tsx": "^4.20.0",
     "typescript": "^5.9.0",
