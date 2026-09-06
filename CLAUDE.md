@@ -53,6 +53,8 @@ On (音) readings derive from Chinese; kun (訓) readings are native Japanese.
 | **湯桶** (yutou) | kun + on | 手本 てほん, 手帳 てちょう, 焼肉 やきにく |
 | **熟字訓** (jukujikun) | irregular — reading maps to the whole word, not to characters | 一人 ひとり, 昨日 きのう, 二十歳 はたち |
 
+As of 2026-09-06 the dataset has no 目 entry; this chain is described, not yet built.
+
 The first four are **decomposable**: classification is derivable from the two
 characters' reading types. 熟字訓 is the exception — the reading is assigned to
 the compound as a unit and cannot be decomposed. Validation logic must treat it
@@ -153,7 +155,8 @@ classification shifts with the partner character. Known chains:
   Same character, same reading, classification determined entirely by the
   partner. This chain has a clean, statable rule and is the best introduction.
 - **目** — semantic split: め (kun) in concrete/practical compounds (目印, 目玉,
-  目安) vs モク (on) in abstract/strategic ones (目標, 目的).
+  目安) vs モク (on) in abstract/strategic ones (目標, 目的). As of 2026-09-06
+  the dataset has no 目 entry; this chain is described, not yet built.
 - **夕** — always ゆう (kun), across 夕刊, 夕食, 夕飯, 夕暮れ. A reliability
   anchor: shows that some characters *are* stable.
 - **毎** — always マイ (on); classification of 毎X is determined by the second

@@ -631,7 +631,7 @@ Entries in no chain: 65 — 学校, 相殺, 出納, 遊説, 貼付, 早速, 境�
 |---|---|---|---|---|
 | `cr_0004` | 遊説 | ゆうぜい | none recorded | Prescriptive ゆうぜい, variant ゆうせつ — Native speakers commonly err. (From DATA_SPEC.md §7.4; the source entry records no alternate reading.) |
 | `cr_0005` | 貼付 | ちょうふ | none recorded | Prescriptive ちょうふ, variant てんぷ — Both widely accepted. (From DATA_SPEC.md §7.4; the source entry records no alternate reading.) |
-| `cr_0031` | 施行 | しこう | せこう (`disputed`), せぎょう (`standard`) | せこう (variant — widespread but prescriptively contested): Construction/engineering contexts (工事の施行). Also increasingly used for legal contexts despite しこう being prescriptive. |
+| `cr_0031` | 施行 | しこう | せこう (`variant_spreading`), せぎょう (`standard`) | せこう (variant — widespread but prescriptively contested): Construction/engineering contexts (工事の施行). Also increasingly used for legal contexts despite しこう being prescriptive. |
 | `cr_0032` | 代替 | だいたい | だいがえ (`variant_spreading`) | だいがえ (variant — widespread, originally non-standard): Increasingly common in business and media. Changes the classification from 音音 to 重箱. |
 | `cr_0097` | 重複 | ちょうふく | じゅうふく (`variant_accepted`) | じゅうふく (variant — increasingly accepted): Originally non-standard but now widely accepted. NHK permits both. Many younger speakers prefer じゅうふく. |
 | `cr_0098` | 続柄 | つづきがら | ぞくがら (`variant_spreading`) | ぞくがら (variant — widely used, originally non-standard): Common in spoken Japanese. Technically a misreading that has become standard through widespread use. |
@@ -642,7 +642,7 @@ Entries in no chain: 65 — 学校, 相殺, 出納, 遊説, 貼付, 早速, 境�
 
 | ID | Compound | Primary (classification) | Alternates |
 |---|---|---|---|
-| `cr_0031` | 施行 | しこう (音音) | せこう (音音, `disputed`); せぎょう (音音, `standard`) |
+| `cr_0031` | 施行 | しこう (音音) | せこう (音音, `variant_spreading`); せぎょう (音音, `standard`) |
 | `cr_0032` | 代替 | だいたい (音音) | だいがえ (重箱, `variant_spreading`) |
 | `cr_0038` | 世論 | せろん (音音) | よろん (訓訓, `standard`) |
 | `cr_0054` | 毎月 | まいつき (重箱) | まいげつ (音音, `standard`) |

@@ -122,8 +122,8 @@ function mapStatus(s: string): { status: AlternateStatus; rule: string } {
   if (s.startsWith("standard")) return { status: "standard", rule: 'begins with "standard"' };
   if (["NHC changed", "NHK changed", "increasingly accepted", "permit"].some((k) => s.includes(k)))
     return { status: "variant_accepted", rule: 'contains "NHC changed" / "NHK changed" / "increasingly accepted" / "permit"' };
-  if (["widespread but contested", "originally non-standard"].some((k) => s.includes(k)))
-    return { status: "variant_spreading", rule: 'contains "widespread but contested" / "originally non-standard"' };
+  if (["widespread but contested", "prescriptively contested", "originally non-standard"].some((k) => s.includes(k)))
+    return { status: "variant_spreading", rule: 'contains "widespread but contested" / "prescriptively contested" / "originally non-standard"' };
   if (s.includes("domain-specific")) return { status: "standard", rule: 'contains "domain-specific"' };
   return { status: "disputed", rule: "unmatched → disputed" };
 }

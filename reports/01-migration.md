@@ -259,12 +259,12 @@ Resulting token counts over the canonical dataset:
 | `standard` | `standard` | begins with "standard" | 8 | 毎月 まいげつ, 今日 こんにち, 明日 あす, 明日 みょうにち, 毎年 まいねん, 二十歳 にじっさい, 一人 いちにん, 二人 ににん |
 | `variant — NHK changed to permit いぞん in 2014` | `variant_accepted` | contains "NHC changed" / "NHK changed" / "increasingly accepted" / "permit" | 1 | 依存 いぞん |
 | `variant — increasingly accepted` | `variant_accepted` | contains "NHC changed" / "NHK changed" / "increasingly accepted" / "permit" | 1 | 重複 じゅうふく |
-| `variant — widely used, originally non-standard` | `variant_spreading` | contains "widespread but contested" / "originally non-standard" | 1 | 続柄 ぞくがら |
-| `variant — widespread but contested` | `variant_spreading` | contains "widespread but contested" / "originally non-standard" | 1 | 一段落 ひとだんらく |
-| `variant — widespread but prescriptively contested` | `disputed` | unmatched → disputed | 1 | 施行 せこう |
-| `variant — widespread, originally non-standard` | `variant_spreading` | contains "widespread but contested" / "originally non-standard" | 1 | 代替 だいがえ |
+| `variant — widely used, originally non-standard` | `variant_spreading` | contains "widespread but contested" / "prescriptively contested" / "originally non-standard" | 1 | 続柄 ぞくがら |
+| `variant — widespread but contested` | `variant_spreading` | contains "widespread but contested" / "prescriptively contested" / "originally non-standard" | 1 | 一段落 ひとだんらく |
+| `variant — widespread but prescriptively contested` | `variant_spreading` | contains "widespread but contested" / "prescriptively contested" / "originally non-standard" | 1 | 施行 せこう |
+| `variant — widespread, originally non-standard` | `variant_spreading` | contains "widespread but contested" / "prescriptively contested" / "originally non-standard" | 1 | 代替 だいがえ |
 
-Unmatched strings (fell to `disputed`): 1 — `variant — widespread but prescriptively contested` (施行 せこう).
+Unmatched strings (fell to `disputed`): 0.
 
 ## 6. Judgment calls
 
@@ -286,7 +286,7 @@ Entries with `contested: true`: 8 — 遊説, 貼付, 施行, 代替, 重複, �
 |---|---|---|---|
 | 遊説 | `on_on_04` | §7.4 table only | Prescriptive ゆうぜい, variant ゆうせつ — Native speakers commonly err. (From DATA_SPEC.md §7.4; the source entry records no alternate reading.) |
 | 貼付 | `on_on_05` | §7.4 table only | Prescriptive ちょうふ, variant てんぷ — Both widely accepted. (From DATA_SPEC.md §7.4; the source entry records no alternate reading.) |
-| 施行 | `on_on_08` | alternate with status `disputed`; also in the §7.4 table | せこう (variant — widespread but prescriptively contested): Construction/engineering contexts (工事の施行). Also increasingly used for legal contexts despite しこう being prescriptive. |
+| 施行 | `on_on_08` | alternate with status `variant_spreading`; also in the §7.4 table | せこう (variant — widespread but prescriptively contested): Construction/engineering contexts (工事の施行). Also increasingly used for legal contexts despite しこう being prescriptive. |
 | 代替 | `on_on_09` | alternate with status `variant_spreading`; also in the §7.4 table | だいがえ (variant — widespread, originally non-standard): Increasingly common in business and media. Changes the classification from 音音 to 重箱. |
 | 重複 | `on_on_25` | alternate with status `variant_accepted`; also in the §7.4 table | じゅうふく (variant — increasingly accepted): Originally non-standard but now widely accepted. NHK permits both. Many younger speakers prefer じゅうふく. |
 | 続柄 | `on_on_26` | alternate with status `variant_spreading`; also in the §7.4 table | ぞくがら (variant — widely used, originally non-standard): Common in spoken Japanese. Technically a misreading that has become standard through widespread use. |

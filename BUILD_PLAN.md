@@ -126,7 +126,7 @@ listed dictionary readings while `phonetic_changes` is empty.
 
 Validation failure fails the build. Not a warning.
 
-**0.7 — Fix the six known defects** in `CLAUDE.md` §6. Only those six. Anything
+**0.7 — Fix the eight known defects** in `CLAUDE.md` §6. Only those eight. Anything
 else you notice goes in `reports/02-flagged.md` for Dan.
 
 **0.8 — Compact transform.** `scripts/build-compact.ts` generates the app-facing

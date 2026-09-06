@@ -283,42 +283,51 @@ const SELF_CORRECTION = /\b(wait|actually|hmm|correction|rethink)\b/i;
 // Judgment flags that are not derivable from the data files (static by design,
 // like the corrections list in scripts/audit.ts). Each is a decision for Dan's
 // study project; none was applied to the data beyond what DATA_SPEC.md §3 and
-// the Session 2 brief prescribe.
-const STATIC_FLAGS: { topic: string; flag: string; recommendation: string }[] = [
+// the session briefs prescribe. A flag a later brief decided keeps its text and
+// gains a dated `decided` line, so the report shows what was asked and what
+// was ruled.
+const STATIC_FLAGS: { topic: string; flag: string; recommendation: string; decided?: string }[] = [
   {
     topic: "一段落 alternate ひとだんらく",
     flag: "The source gives this alternate the classification `irregular` (kun + on + on). The canonical enum has no such value; consolidation set it to 湯桶 (yutou) by the same rule DATA_SPEC.md §3 applies to 朝寝坊 (two-character derivation on the first two characters).",
     recommendation: "Keep 湯桶, or rule that three-character alternates carry the primary entry's classification.",
+    decided: "2026-09-06 (Session 3 brief): 湯桶 by the three-character rule, accepted.",
   },
   {
     topic: "施行 alternate せこう",
     flag: "Its source status `variant — widespread but prescriptively contested` matched no row of the DATA_SPEC.md §7.3 rule table and fell to `disputed`. The other five contested alternates mapped to `variant_accepted` or `variant_spreading`.",
     recommendation: "Confirm `disputed`, or add the string to the `variant_spreading` row of the rule table.",
+    decided: "2026-09-06 (Session 3 brief): \"prescriptively contested\" added to the `variant_spreading` row of DATA_SPEC.md §7.3; consolidation rerun; せこう now maps to `variant_spreading`.",
   },
   {
     topic: "場 chain rule_reliability",
     flag: "CLAUDE.md §5 gives 場 no reliability value; DATA_SPEC.md §5.2 names only 手/夕/毎 as clean and 目 as usually. chains.json proposes `usually` for 場 with the rule \"a character's reading type is not a fixed property\".",
     recommendation: "Accept `usually`.",
+    decided: "2026-09-06 (Session 3 brief): `usually` accepted.",
   },
   {
     topic: "手 chain and 手段",
     flag: "CLAUDE.md §5 calls the 手 rule clean (手 is て throughout), but 手段 (しゅだん, 手 = シュ on) is in the dataset and in the chain. The validator flags it (§7.6). 切手 and 新手 also have 手 in second position.",
     recommendation: "Either restate the rule as \"when 手 is て, the partner decides\" (usually), or keep clean and exclude 手段 from the 手 chain's entry_order as the stated exception.",
+    decided: "2026-09-06 (Session 3 brief): stays `clean`; 手段 is last in entry_order and listed in the chain's `exceptions`; the rule text is not reworded (pedagogy, owned by the study project). WARN 17 stays until the study project rules on the wording — reports/cargo-for-study-project-2026-09-06.md (a.3).",
   },
   {
     topic: "CLAUDE.md prose names entries that do not exist",
     flag: "CLAUDE.md §2 uses 目的 as a 音音 anchor and §5 describes the 目 chain with 目印, 目玉, 目安, 目標, 目的. None of these compounds is in any source batch; no entry contains 目. The 目 row in chains.json has an empty entry_order. DATA_SPEC.md §7.8 would require fixtures for these, which cannot pass, so they are not in scripts/anchors.json.",
     recommendation: "Add the five 目 entries in Phase 3 (dataset expansion), or drop 目 from CLAUDE.md §2/§5 until then. The next brief should authorize the CLAUDE.md edit either way.",
+    decided: "2026-09-06 (Session 3 brief): the 目 row stays in chains.json and is not offered in Chain Explorer until it has entries; CLAUDE.md §2 and §5 each carry one sentence saying so. Adding entries is the study project's — cargo document (d).",
   },
   {
     topic: "Candidate tags not applied",
     flag: "DATA_SPEC.md §8 suggests tags only where the source supports them. The source prose supports: `kokuji` on 茶畑 (畑), 申込 (込), 辻褄 (辻), 枠組み (枠) — each reading_note or trap_note names the character as a 国字; `meta` on 音読み and 訓読み; `meal_matrix` on 朝食, 朝飯, 夕食, 夕飯; `color` on 真っ赤, 真っ白, 真っ黒, 真っ青, 茶色, 灰色; `number` on 一人, 二人, 一日, 一口, 一言, 二十歳. Only the tags the brief mandates (`unclassifiable`, and `kokuji` on 峠) were applied.",
     recommendation: "Approve the list and the next session applies it in consolidation with a migration-report row per tag.",
+    decided: "2026-09-06 (Session 3 brief): not decided here; handed to the study project — cargo document (f). No tag applied.",
   },
   {
     topic: "DATA_SPEC.md §1 file table",
     flag: "The table lists `data/source/prototype-entries.json` as a read-only file. No such file exists; the prototype entries live inside `data/source/compound-drill.prototype.jsx` and are extracted at consolidation time. The row was outside this session's authorized amendments.",
     recommendation: "Authorize replacing that row with the .jsx path in the next brief.",
+    decided: "2026-09-06 (Session 3 brief): the row now names the .jsx file and the extraction at consolidation time.",
   },
 ];
 
@@ -412,9 +421,9 @@ export function flaggedReport(dataset: Dataset, chainsFile: ChainsFile, result: 
 
   P("## 6. Judgment calls and doubts for Dan to rule on");
   P();
-  P("| Topic | Flag | Recommended answer |");
-  P("|---|---|---|");
-  for (const f of STATIC_FLAGS) P(`| ${md(f.topic)} | ${md(f.flag)} | ${md(f.recommendation)} |`);
+  P("| Topic | Flag | Recommended answer | Decided |");
+  P("|---|---|---|---|");
+  for (const f of STATIC_FLAGS) P(`| ${md(f.topic)} | ${md(f.flag)} | ${md(f.recommendation)} | ${f.decided ? md(f.decided) : "open"} |`);
   P();
   P("Not fixed by design: 勝負 keeps its empty `phonetic_changes` (CLAUDE.md §6.6 asks the validator to flag it, section 1 above; DATA_SPEC.md §6 says the eventual fix is `other` with a detail note, which is Dan's to apply).");
   P();
