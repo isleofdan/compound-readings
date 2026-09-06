@@ -5,7 +5,7 @@ From: the Claude Code session that ran it on Dan's laptop, 2026-09-06
 
 ## What stands
 
-- **The repository.** `isleofdan/compound-readings`, private, default branch `main`, 10 commits. See it at https://github.com/isleofdan/compound-readings. Local copy at `C:\Users\shulm\GithubProjects\compound-readings`.
+- **The repository.** `isleofdan/compound-readings`, private, default branch `main`, 9 commits (8 for the seven numbered steps plus this correction). See it at https://github.com/isleofdan/compound-readings. Local copy at `C:\Users\shulm\GithubProjects\compound-readings`.
 - **The ten build files, byte for byte.** Installed at the paths in the brief's §3 table; every SHA-256 matches the zip original (table at the end of this report).
 - **The scaffold.** Vite 7, React 19, TypeScript 5.9, Tailwind 4, Vitest 3, Zod 4 installed but unused. The hello page shows 複合語の読み, "Compound Readings — hello", and "168 source entries", with 168 computed at build time by `scripts/source-count.ts` from the four batch files. `npm test` (5 tests, one of which recounts the files independently and compares), `npm run build` (type-check then bundle) and `npm run validate` (placeholder line) are all green. Vite `base` is `/compound-readings/`. Checked by eye at 380 px and 1280 px.
 - **The multi-user rule.** `CLAUDE.md` §1 now contains the sentence "no path, storage key, identifier, or data shape may assume there is only one user" and no longer contains "There is no other user"; `DATA_SPEC.md` §9 has the key shape `cr:<userId>:progress:v<schema>`; `BUILD_PLAN.md` 2.1 has the namespacing sentence. The prototype row in Status of inputs reads: located, installed, 43 entries, [V].
