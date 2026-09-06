@@ -12,7 +12,8 @@
     "audit": "tsx scripts/audit.ts",
     "consolidate": "tsx scripts/consolidate.ts",
     "build:compact": "tsx scripts/build-compact.ts",
-    "build:index": "tsx scripts/build-index.ts"
+    "build:index": "tsx scripts/build-index.ts",
+    "pretest": "tsx scripts/build-compact.ts"
   },
   "dependencies": {
     "react": "^19.1.0",
