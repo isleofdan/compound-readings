@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Browse } from "./modes/Browse";
 import { ChainExplorer, EMPTY_REVEAL_STATE, type RevealState } from "./modes/ChainExplorer";
 import { ClassificationDrill, EMPTY_DRILL_STATE, type DrillState } from "./modes/ClassificationDrill";
-import { PredictionChallenge } from "./modes/PredictionChallenge";
+import { EMPTY_PREDICT_STATE, PredictionChallenge, type PredictState } from "./modes/PredictionChallenge";
 import { useRoute } from "./router";
 import { TabBar } from "./ui/TabBar";
 
@@ -16,6 +16,7 @@ export default function App() {
   const [route, navigate] = useRoute();
   const [reveal, setReveal] = useState<RevealState>(EMPTY_REVEAL_STATE);
   const [drill, setDrill] = useState<DrillState>(EMPTY_DRILL_STATE);
+  const [predict, setPredict] = useState<PredictState>(EMPTY_PREDICT_STATE);
   return (
     <>
       <main className="mx-auto max-w-md pb-40">
@@ -24,7 +25,7 @@ export default function App() {
         ) : route.tab === "drill" ? (
           <ClassificationDrill route={route} navigate={navigate} state={drill} setState={setDrill} />
         ) : route.tab === "predict" ? (
-          <PredictionChallenge route={route} navigate={navigate} />
+          <PredictionChallenge route={route} navigate={navigate} state={predict} setState={setPredict} />
         ) : (
           <ChainExplorer route={route} navigate={navigate} state={reveal} setState={setReveal} />
         )}

@@ -97,12 +97,14 @@ const SESSION_4 = [
   { name: "predict", hash: "#/predict" },
   { name: "predict-filter-rendaku", hash: "#/predict?pc=rendaku" },
   { name: "predict-miss", hash: "#/predict", steps: [predictAnswer("x")] },
-  { name: "predict-施行-せこう", hash: "#/predict", steps: [findPredict("施行", "せこう")] },
-  { name: "predict-施行-せこう-bottom", hash: "#/predict", steps: [findPredict("施行", "せこう"), scrollBottom()] },
-  { name: "predict-場所-じょうしょ", hash: "#/predict", steps: [findPredict("場所", "じょうしょ")] },
-  { name: "predict-茶畑-ちゃはたけ", hash: "#/predict", steps: [findPredict("茶畑", "ちゃはたけ")] },
-  { name: "predict-手数-てすう", hash: "#/predict", steps: [findPredict("手数", "てすう")] },
-  { name: "predict-大人-だいじん", hash: "#/predict", steps: [findPredict("大人", "だいじん")] },
+  // Walking to a named compound goes through the classification filter so the walk (and the tally it leaves) is short.
+  { name: "predict-施行-せこう", hash: "#/predict?cls=on_on", steps: [findPredict("施行", "せこう")] },
+  { name: "predict-施行-せこう-bottom", hash: "#/predict?cls=on_on", steps: [findPredict("施行", "せこう"), scrollBottom()] },
+  { name: "predict-場所-じょうしょ", hash: "#/predict?cls=yutou", steps: [findPredict("場所", "じょうしょ")] },
+  { name: "predict-茶畑-ちゃはたけ", hash: "#/predict?cls=juubako", steps: [findPredict("茶畑", "ちゃはたけ")] },
+  { name: "predict-学校-がくこう", hash: "#/predict?cls=on_on", steps: [findPredict("学校", "がくこう")] },
+  { name: "predict-手数-てすう", hash: "#/predict?cls=yutou", steps: [findPredict("手数", "てすう")] },
+  { name: "predict-大人-だいじん", hash: "#/predict?cls=jukujikun", steps: [findPredict("大人", "だいじん")] },
 ];
 
 const SETS = { "session-3": SESSION_3, "session-4": SESSION_4 };

@@ -103,7 +103,7 @@ export function ClassificationDrill({ route, navigate, state, setState }: { rout
           <h1 className="text-xl font-bold">{DRILL_LABELS.drillTitle}</h1>
           <Tally parts={[[DRILL_LABELS.correct, state.tally.correct], [DRILL_LABELS.wrong, state.tally.wrong]]} />
         </div>
-        <button type="button" onClick={reset} className="min-h-9 rounded-full border border-neutral-400 px-3 text-sm">
+        <button type="button" onClick={reset} className="min-h-9 shrink-0 whitespace-nowrap rounded-full border border-neutral-400 px-3 text-sm">
           {DRILL_LABELS.reset}
         </button>
       </header>
