@@ -323,3 +323,88 @@ Defect 6.5 dictionary check, as CLAUDE.md §6.5 requires: 漢字ペディア (�
 `tags` applied: 朝寝坊 [unclassifiable]; 真っ赤 [unclassifiable]; 真っ青 [unclassifiable]; 峠 [kokuji, unclassifiable]. No other tag was applied; candidate tags the source supports are listed in reports/02-flagged.md for Dan.
 `decomposable` false: 20 (the 熟字訓 entries).
 
+## 10. Prototype merge (DATA_SPEC.md §4.2)
+
+`data/source/compound-drill.prototype.jsx`: 43 prototype entries, extracted from the file text (the React file is not imported). Matched to canonical entries on `compound` + `reading`, never on id. Only `chains[]` is merged; every other prototype field is compared and the source is retained.
+
+- Matched: 40 of 43
+- Not matched, **not inserted**: 3 — 会議 かいぎ (`on02`), 毎日 まいにち (`on05`), 若葉 わかば (`kun08`). No source entry carries these compounds; the prototype is not a source of entries.
+
+Matches and the chain characters merged from the prototype:
+
+| Prototype ID | Compound | Canonical ID | Source ID | Prototype `chains[]` | Merged |
+|---|---|---|---|---|---|
+| `on01` | 学校 | `cr_0001` | `on_on_01` | 学 | 学 |
+| `on03` | 職場 | `cr_0048` | `juubako_09` | 場 職 | 場 職 |
+| `on04` | 場面 | `cr_0085` | `on_on_22` | 場 | 場 |
+| `on06` | 毎晩 | `cr_0081` | `on_on_21` | 毎 | 毎 |
+| `on07` | 散歩 | `cr_0075` | `on_on_18` | (none) | (none) |
+| `on08` | 施行 | `cr_0031` | `on_on_08` | 行 | 行 |
+| `on09` | 代替 | `cr_0032` | `on_on_09` | 代 | 代 |
+| `on10` | 出納 | `cr_0003` | `on_on_03` | 出 | 出 |
+| `on11` | 朝食 | `cr_0114` | `on_on_33` | 朝 食 | 朝 食 |
+| `on12` | 夕食 | `cr_0115` | `on_on_34` | 夕 食 | 夕 食 |
+| `kun01` | 山道 | `cr_0009` | `kun_kun_02` | 山 道 | 山 道 |
+| `kun02` | 手紙 | `cr_0010` | `kun_kun_03` | 手 | 手 |
+| `kun03` | 手間 | `cr_0044` | `kun_kun_11` | 手 間 | 手 間 |
+| `kun04` | 焼鳥 | `cr_0079` | `kun_kun_15` | 焼 | 焼 |
+| `kun05` | 朝飯 | `cr_0113` | `yutou_18` | 朝 飯 | 朝 飯 |
+| `kun06` | 夕飯 | `cr_0116` | `yutou_19` | 夕 飯 | 夕 飯 |
+| `kun07` | 立場 | `cr_0047` | `kun_kun_14` | 場 立 | 場 立 |
+| `kun09` | 物語 | `cr_0012` | `kun_kun_05` | (none) | (none) |
+| `jb01` | 本棚 | `cr_0015` | `juubako_01` | 本 | 本 |
+| `jb02` | 本場 | `cr_0049` | `juubako_10` | 本 場 | 本 場 |
+| `jb03` | 毎朝 | `cr_0019` | `juubako_05` | 毎 朝 | 毎 朝 |
+| `jb04` | 毎月 | `cr_0054` | `juubako_15` | 毎 月 | 毎 月 |
+| `jb05` | 新芽 | `cr_0053` | `juubako_14` | 新 | 新 |
+| `jb06` | 茶畑 | `cr_0055` | `juubako_16` | 茶 | 茶 |
+| `jb07` | 役場 | `cr_0078` | `juubako_17` | 場 役 | 場 役 |
+| `jb08` | 番組 | `cr_0017` | `juubako_03` | (none) | (none) |
+| `yt01` | 場所 | `cr_0027` | `yutou_05` | 場 所 | 場 所 |
+| `yt02` | 手本 | `cr_0056` | `yutou_07` | 手 本 | 手 本 |
+| `yt03` | 手帳 | `cr_0057` | `yutou_08` | 手 | 手 |
+| `yt04` | 手数 | `cr_0058` | `yutou_09` | 手 数 | 手 数 |
+| `yt05` | 焼肉 | `cr_0080` | `yutou_14` | 焼 | 焼 |
+| `yt06` | 見本 | `cr_0023` | `yutou_01` | 本 見 | 本 見 |
+| `yt07` | 雨具 | `cr_0025` | `yutou_03` | (none) | (none) |
+| `jk01` | 大人 | `cr_0029` | `jukujikun_01` | 人 | 人 |
+| `jk02` | 昨日 | `cr_0030` | `jukujikun_02` | 日 | 日 |
+| `jk03` | 今日 | `cr_0063` | `jukujikun_03` | 日 今 | 日 今 |
+| `jk04` | 明日 | `cr_0064` | `jukujikun_04` | 日 明 | 日 明 |
+| `jk05` | 素人 | `cr_0066` | `jukujikun_06` | 人 | 人 |
+| `jk06` | 梅雨 | `cr_0070` | `jukujikun_10` | (none) | (none) |
+| `jk07` | 土産 | `cr_0065` | `jukujikun_05` | (none) | (none) |
+
+Disagreements: 28 (classification 8, reading_type 6, reading_in_compound 14) across 15 prototype entries. In every row the source is retained; the prototype value and its trap text are discarded (CLAUDE.md §6.7 for 場所; DATA_SPEC.md §4.2 for the rest).
+
+| Prototype ID | Compound | Canonical ID | Field | Prototype says | Source says | Outcome |
+|---|---|---|---|---|---|---|
+| `on03` | 職場 | `cr_0048` | classification | 音音 (on_on) | 重箱 (juubako) | source retained |
+| `on03` | 職場 | `cr_0048` | char 2 (場) reading_type | on | kun | source retained |
+| `on04` | 場面 | `cr_0085` | classification | 音音 (on_on) | 湯桶 (yutou) | source retained |
+| `on04` | 場面 | `cr_0085` | char 1 (場) reading_type | on | kun | source retained |
+| `on12` | 夕食 | `cr_0115` | classification | 重箱 (juubako) | 湯桶 (yutou) | source retained |
+| `kun06` | 夕飯 | `cr_0116` | classification | 重箱 (juubako) | 湯桶 (yutou) | source retained |
+| `kun07` | 立場 | `cr_0047` | classification | 湯桶 (yutou) | 訓訓 (kun_kun) | source retained |
+| `kun07` | 立場 | `cr_0047` | char 2 (場) reading_type | on | kun | source retained |
+| `jb02` | 本場 | `cr_0049` | classification | 音音 (on_on) | 重箱 (juubako) | source retained |
+| `jb02` | 本場 | `cr_0049` | char 2 (場) reading_type | on | kun | source retained |
+| `jb07` | 役場 | `cr_0078` | classification | 音音 (on_on) | 重箱 (juubako) | source retained |
+| `jb07` | 役場 | `cr_0078` | char 2 (場) reading_type | on | kun | source retained |
+| `yt01` | 場所 | `cr_0027` | classification | 音音 (on_on) | 湯桶 (yutou) | source retained |
+| `yt01` | 場所 | `cr_0027` | char 1 (場) reading_type | on | kun | source retained |
+| `jk01` | 大人 | `cr_0029` | char 1 (大) reading_in_compound | null | おと | source retained |
+| `jk01` | 大人 | `cr_0029` | char 2 (人) reading_in_compound | null | な | source retained |
+| `jk02` | 昨日 | `cr_0030` | char 1 (昨) reading_in_compound | null | き | source retained |
+| `jk02` | 昨日 | `cr_0030` | char 2 (日) reading_in_compound | null | のう | source retained |
+| `jk03` | 今日 | `cr_0063` | char 1 (今) reading_in_compound | null | きょ | source retained |
+| `jk03` | 今日 | `cr_0063` | char 2 (日) reading_in_compound | null | う | source retained |
+| `jk04` | 明日 | `cr_0064` | char 1 (明) reading_in_compound | null | あし/あ | source retained |
+| `jk04` | 明日 | `cr_0064` | char 2 (日) reading_in_compound | null | た/す | source retained |
+| `jk05` | 素人 | `cr_0066` | char 1 (素) reading_in_compound | null | しろ | source retained |
+| `jk05` | 素人 | `cr_0066` | char 2 (人) reading_in_compound | null | うと | source retained |
+| `jk06` | 梅雨 | `cr_0070` | char 1 (梅) reading_in_compound | null | つ | source retained |
+| `jk06` | 梅雨 | `cr_0070` | char 2 (雨) reading_in_compound | null | ゆ | source retained |
+| `jk07` | 土産 | `cr_0065` | char 1 (土) reading_in_compound | null | みや | source retained |
+| `jk07` | 土産 | `cr_0065` | char 2 (産) reading_in_compound | null | げ | source retained |
+

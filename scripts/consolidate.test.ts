@@ -50,3 +50,19 @@ describe("consolidate", () => {
     expect(a.entries.filter((e) => e.has_kana).length).toBe(11);
   });
 });
+
+describe("prototype merge", () => {
+  const c = consolidate();
+  it("extracts 43 prototype entries, matches 40, leaves 3 unmatched and uninserted", () => {
+    expect(c.prototype.entries.length).toBe(43);
+    expect(c.prototype.matched.length).toBe(40);
+    expect(c.prototype.unmatched.map((p) => p.compound).sort()).toEqual(["会議", "毎日", "若葉"].sort());
+    expect(c.entries.length).toBe(168);
+  });
+  it("retains the source on every disagreement (場所 stays 湯桶 with 場 kun)", () => {
+    const basho = c.entries.find((e) => e.compound === "場所")!;
+    expect(basho.classification).toBe("yutou");
+    expect(basho.characters[0].reading_type).toBe("kun");
+    expect(c.prototype.disagreements.length).toBe(28);
+  });
+});

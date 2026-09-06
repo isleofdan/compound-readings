@@ -139,6 +139,95 @@ const CONTESTED_TABLE: Record<string, { prescriptive: string; variant: string; n
 };
 const CONTESTED_STATUSES: AlternateStatus[] = ["variant_accepted", "variant_spreading", "disputed"];
 
+// ---------------------------------------------------------------- prototype (DATA_SPEC.md §4.2)
+
+const PROTOTYPE_FILE = "compound-drill.prototype.jsx";
+
+export type ProtoChar = { k: string; r: string; t: string };
+export type ProtoEntry = {
+  id: string;
+  compound: string;
+  reading: string;
+  chars: ProtoChar[];
+  cls: string;
+  diff: number;
+  changes: string[];
+  changeDetail: string | null;
+  context: string;
+  trap: string | null;
+  chains: string[];
+  altReadings?: { reading: string; cls: string; note: string }[];
+};
+
+// The ENTRIES array is extracted from the file text between `const ENTRIES = [`
+// and the `];` that closes it and evaluated as a JavaScript array literal. The
+// React file itself is never imported.
+export function loadPrototype(): ProtoEntry[] {
+  const text = readFileSync(join(SOURCE_DIR, PROTOTYPE_FILE), "utf8");
+  const open = "const ENTRIES = [";
+  const start = text.indexOf(open);
+  if (start === -1) throw new Error(`"${open}" not found in ${PROTOTYPE_FILE}`);
+  const close = text.indexOf("\n];", start);
+  if (close === -1) throw new Error(`"];" closing ENTRIES not found in ${PROTOTYPE_FILE}`);
+  const body = text.slice(start + open.length, close);
+  return new Function(`"use strict"; return [${body}\n];`)() as ProtoEntry[];
+}
+
+export type ProtoDisagreement = { proto: ProtoEntry; entry: Entry; field: string; protoSays: string; sourceSays: string };
+export type PrototypeMerge = {
+  entries: ProtoEntry[];
+  matched: { proto: ProtoEntry; entry: Entry; chainsMerged: string[] }[];
+  unmatched: ProtoEntry[];
+  disagreements: ProtoDisagreement[];
+};
+
+// Match on compound + reading (never on id); merge chains[] only; log every
+// disagreement with the source retained.
+export function mergePrototype(entries: Entry[]): PrototypeMerge {
+  const protos = loadPrototype();
+  const byKey = new Map<string, Entry>();
+  for (const e of entries) {
+    const k = `${e.compound}|${e.reading}`;
+    if (byKey.has(k)) throw new Error(`duplicate compound+reading in canonical data: ${k}`);
+    byKey.set(k, e);
+  }
+  const matched: PrototypeMerge["matched"] = [];
+  const unmatched: ProtoEntry[] = [];
+  const disagreements: ProtoDisagreement[] = [];
+  for (const p of protos) {
+    const e = byKey.get(`${p.compound}|${p.reading}`);
+    if (!e) {
+      unmatched.push(p);
+      continue;
+    }
+    const chainsMerged: string[] = [];
+    for (const ch of p.chains ?? [])
+      if (!e.chains.includes(ch)) {
+        e.chains.push(ch);
+        chainsMerged.push(ch);
+      }
+    matched.push({ proto: p, entry: e, chainsMerged });
+
+    if (p.cls !== e.classification)
+      disagreements.push({ proto: p, entry: e, field: "classification", protoSays: cls(p.cls), sourceSays: cls(e.classification) });
+    if (p.chars.length !== e.characters.length) {
+      disagreements.push({ proto: p, entry: e, field: "characters length", protoSays: String(p.chars.length), sourceSays: String(e.characters.length) });
+      continue;
+    }
+    p.chars.forEach((pc, i) => {
+      const sc = e.characters[i];
+      const pt = pc.t === "—" ? "neither" : pc.t;
+      const pr = pc.r === "—" ? null : pc.r;
+      if (pc.k !== sc.kanji) disagreements.push({ proto: p, entry: e, field: `char ${i + 1} kanji`, protoSays: pc.k, sourceSays: sc.kanji });
+      if (pt !== sc.reading_type)
+        disagreements.push({ proto: p, entry: e, field: `char ${i + 1} (${pc.k}) reading_type`, protoSays: pt, sourceSays: sc.reading_type });
+      if (pr !== sc.reading_in_compound)
+        disagreements.push({ proto: p, entry: e, field: `char ${i + 1} (${pc.k}) reading_in_compound`, protoSays: String(pr), sourceSays: String(sc.reading_in_compound) });
+    });
+  }
+  return { entries: protos, matched, unmatched, disagreements };
+}
+
 // ---------------------------------------------------------------- load
 
 type Loaded = { batch: number; file: string; topLevel: Record<string, unknown>; entries: SourceEntry[] };
@@ -194,6 +283,7 @@ export type Consolidation = {
   statusRows: { source_id: string; compound: string; reading: string; from: string; to: AlternateStatus; rule: string }[];
   judgments: Judgment[];
   fixes: AppliedFix[];
+  prototype: PrototypeMerge;
 };
 
 export function consolidate(): Consolidation {
@@ -358,7 +448,9 @@ export function consolidate(): Consolidation {
     }
   }
 
-  return { batches, entries, idTable, unexpectedEntryFields, unexpectedCharFields, unexpectedAltFields, tokenRows, statusRows, judgments, fixes };
+  const prototype = mergePrototype(entries);
+
+  return { batches, entries, idTable, unexpectedEntryFields, unexpectedCharFields, unexpectedAltFields, tokenRows, statusRows, judgments, fixes, prototype };
 }
 
 // ---------------------------------------------------------------- report
@@ -520,6 +612,31 @@ export function migrationReport(c: Consolidation): string {
   const tagged = c.entries.filter((e) => e.tags.length);
   P(`\`tags\` applied: ${tagged.map((e) => `${e.compound} [${e.tags.join(", ")}]`).join("; ")}. No other tag was applied; candidate tags the source supports are listed in reports/02-flagged.md for Dan.`);
   P(`\`decomposable\` false: ${c.entries.filter((e) => !e.decomposable).length} (the 熟字訓 entries).`);
+  P();
+
+  P("## 10. Prototype merge (DATA_SPEC.md §4.2)");
+  P();
+  const pr = c.prototype;
+  P(`\`data/source/${PROTOTYPE_FILE}\`: ${pr.entries.length} prototype entries, extracted from the file text (the React file is not imported). Matched to canonical entries on \`compound\` + \`reading\`, never on id. Only \`chains[]\` is merged; every other prototype field is compared and the source is retained.`);
+  P();
+  P(`- Matched: ${pr.matched.length} of ${pr.entries.length}`);
+  P(`- Not matched, **not inserted**: ${pr.unmatched.length} — ${pr.unmatched.map((p) => `${p.compound} ${p.reading} (\`${p.id}\`)`).join(", ")}. No source entry carries these compounds; the prototype is not a source of entries.`);
+  P();
+  P("Matches and the chain characters merged from the prototype:");
+  P();
+  P("| Prototype ID | Compound | Canonical ID | Source ID | Prototype `chains[]` | Merged |");
+  P("|---|---|---|---|---|---|");
+  for (const m of pr.matched)
+    P(`| \`${m.proto.id}\` | ${m.proto.compound} | \`${m.entry.id}\` | \`${m.entry.source_id}\` | ${(m.proto.chains ?? []).join(" ") || "(none)"} | ${m.chainsMerged.join(" ") || "(none)"} |`);
+  P();
+  const clsDis = pr.disagreements.filter((d) => d.field === "classification").length;
+  const rtDis = pr.disagreements.filter((d) => d.field.endsWith("reading_type")).length;
+  P(`Disagreements: ${pr.disagreements.length} (classification ${clsDis}, reading_type ${rtDis}, reading_in_compound ${pr.disagreements.length - clsDis - rtDis}) across ${new Set(pr.disagreements.map((d) => d.proto.id)).size} prototype entries. In every row the source is retained; the prototype value and its trap text are discarded (CLAUDE.md §6.7 for 場所; DATA_SPEC.md §4.2 for the rest).`);
+  P();
+  P("| Prototype ID | Compound | Canonical ID | Field | Prototype says | Source says | Outcome |");
+  P("|---|---|---|---|---|---|---|");
+  for (const d of pr.disagreements)
+    P(`| \`${d.proto.id}\` | ${d.proto.compound} | \`${d.entry.id}\` | ${d.field} | ${md(d.protoSays)} | ${md(d.sourceSays)} | source retained |`);
   P();
 
   return L.join("\n") + "\n";

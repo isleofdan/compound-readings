@@ -46,7 +46,9 @@
       "difficulty_rationale": "Universal anchor — every learner knows this word. Useful as a classification confidence-builder.",
       "real_world_context": "N/A — anchor example. But demonstrates 促音 pattern that recurs in many 音音 compounds.",
       "trap_note": null,
-      "chains": [],
+      "chains": [
+        "学"
+      ],
       "tags": []
     },
     {
@@ -151,7 +153,9 @@
       "difficulty_rationale": "Both characters use archaic on readings that most learners have never encountered. Functionally irregular despite being technically 音音.",
       "real_world_context": "Office administration — 出納帳 (cash book), 出納係 (cashier/treasurer). Appears on forms and in accounting contexts. Reading this wrong marks you as an outsider.",
       "trap_note": "Almost everyone's first instinct is しゅつのう. Both characters use their rarest on readings. Knowing this is 音音 doesn't help you predict the reading — you simply have to know it. This is an honest example of where classification fails as a prediction tool.",
-      "chains": [],
+      "chains": [
+        "出"
+      ],
       "tags": []
     },
     {
@@ -454,7 +458,10 @@
       "difficulty_rationale": "Clean anchor. Also useful contrast — 山道 is やまみち but 国道 is こくどう (音音). Same 道 character, different reading based on partner.",
       "real_world_context": "Hiking, driving directions, rural travel. Signage in mountainous areas.",
       "trap_note": "Note that さんどう also exists as a reading (mountain path in Buddhist/literary contexts). Context disambiguates, but this is a good example of the same compound having different readings in different registers.",
-      "chains": [],
+      "chains": [
+        "山",
+        "道"
+      ],
       "tags": []
     },
     {
@@ -505,7 +512,9 @@
       "difficulty_rationale": "Everyone knows this word. Teaching value is in recognizing the 連濁 pattern.",
       "real_world_context": "Daily life. Also a classic false friend for Chinese speakers (手紙 means 'toilet paper' in Chinese).",
       "trap_note": null,
-      "chains": [],
+      "chains": [
+        "手"
+      ],
       "tags": []
     },
     {
@@ -759,7 +768,9 @@
       "difficulty_rationale": "Clean anchor for 重箱読み. The pattern (Sino-Japanese concept + native Japanese object) is visible.",
       "real_world_context": "Furniture shopping, organizing. Extremely common household word.",
       "trap_note": null,
-      "chains": [],
+      "chains": [
+        "本"
+      ],
       "tags": []
     },
     {
@@ -956,7 +967,10 @@
       "difficulty_rationale": "Interesting because 毎+time-word creates a mini-system: 毎朝(まいあさ), 毎晩(まいばん), 毎日(まいにち). Classification varies within the set.",
       "real_world_context": "Daily routine discussions. '毎朝6時に起きる.'",
       "trap_note": "毎朝 is 重箱 (on+kun), but 毎日 is 音音 (マイ+ニチ), and 毎晩 is 音音 (マイ+バン). Same prefix, different classifications depending on whether the second element uses on or kun. Good drill material for showing classification isn't about the word — it's about each character's reading.",
-      "chains": [],
+      "chains": [
+        "毎",
+        "朝"
+      ],
       "tags": []
     },
     {
@@ -1161,7 +1175,10 @@
       "difficulty_rationale": "Clean anchor for 湯桶読み. Common word, unambiguous classification.",
       "real_world_context": "Trade shows, retail, business — 見本市 (trade fair), 見本品 (sample product). '見本をお見せします.'",
       "trap_note": null,
-      "chains": [],
+      "chains": [
+        "本",
+        "見"
+      ],
       "tags": []
     },
     {
@@ -1355,7 +1372,10 @@
       "difficulty_rationale": "Surprising classification. Most learners use this word daily without realizing it's 湯桶読み. Good 'aha moment' entry.",
       "real_world_context": "Ubiquitous — location, place. '場所はどこですか.'",
       "trap_note": "場 on reading is ジョウ (as in 入場, 場面). The short ば is kun. Many learners assume short, common readings must be on. This entry challenges that assumption directly.",
-      "chains": [],
+      "chains": [
+        "場",
+        "所"
+      ],
       "tags": []
     },
     {
@@ -1455,7 +1475,9 @@
       "difficulty_rationale": "Framework-breaker. The four-category system cannot classify this. 熟字訓 is a whole-word reading that doesn't decompose.",
       "real_world_context": "Ubiquitous — adult. '大人1枚' at ticket counters. Also read as たいじん or だいにん in classical/formal contexts.",
       "trap_note": "This entry exists to honestly show where the framework fails. 大人=おとな cannot be predicted from readings of 大 or 人. The tool needs a 'this is 熟字訓, learn it as a unit' category. If the system only has four categories, it will mishandle a significant chunk of common vocabulary.",
-      "chains": [],
+      "chains": [
+        "人"
+      ],
       "tags": []
     },
     {
@@ -1503,7 +1525,9 @@
       "difficulty_rationale": "Another essential framework-breaker. Everyone knows this word, but it cannot be derived from character readings.",
       "real_world_context": "Daily conversation. Also read as さくじつ (音音) in formal contexts — which IS classifiable. Good for showing that the same compound can have both a 熟字訓 and a regular reading.",
       "trap_note": "昨日 has two readings: きのう (熟字訓, conversational) and さくじつ (音音, formal/written). This dual-reading pattern also applies to 今日(きょう/こんにち) and 明日(あした/あす/みょうにち). The tool should handle these as multi-reading entries where one reading is classifiable and one isn't.",
-      "chains": [],
+      "chains": [
+        "日"
+      ],
       "tags": []
     },
     {
@@ -1571,7 +1595,9 @@
       "difficulty_rationale": "Actively contested reading. しこう is prescriptive for law, せこう has taken over in construction and is spreading. Learners encounter both and don't know which is 'right.'",
       "real_world_context": "Legal/regulatory — '法律の施行日' (law's effective date). Construction — '工事を施行する.' Both are common in business contexts.",
       "trap_note": "This is a live example of reading change in progress. NHK and legal dictionaries prescribe しこう for laws. Construction industry universally uses せこう. The semantic split (law=しこう, construction=せこう) is the practical answer, but even this is eroding. Excellent for the 'native speaker ≠ ground truth' principle.",
-      "chains": [],
+      "chains": [
+        "行"
+      ],
       "tags": []
     },
     {
@@ -1632,7 +1658,9 @@
       "difficulty_rationale": "The だいがえ variant is so widespread that learners hear both and question which is correct. Classification itself shifts depending on reading.",
       "real_world_context": "Business — '代替案を出してください' (please propose an alternative). Tech — '代替テキスト' (alt text).",
       "trap_note": "だいがえ likely spread because だいたい is homophonous with 大体 (roughly/generally). The disambiguation pressure is real. This is a great example for teaching that reading shifts sometimes have practical motivations, not just 'corruption.'",
-      "chains": [],
+      "chains": [
+        "代"
+      ],
       "tags": []
     },
     {
@@ -2232,7 +2260,10 @@
       "difficulty_rationale": "Common word. Cross-references with 客間(きゃくま, 重箱) — same 間=ま, different classification because first character differs.",
       "real_world_context": "Workplace — '手間がかかる' (takes time/effort). '手間を省く' (save effort). Very high frequency.",
       "trap_note": "Builds the 間=ま pattern set: 手間(てま, 訓訓), 客間(きゃくま, 重箱), 居間(いま, 訓訓), 茶の間(ちゃのま, complex). The consistent ま reading regardless of partner kanji's reading type makes this a good prediction anchor.",
-      "chains": [],
+      "chains": [
+        "手",
+        "間"
+      ],
       "tags": []
     },
     {
@@ -2386,7 +2417,10 @@
       "difficulty_rationale": "Common word. Cross-references with 場所(ばしょ, 湯桶) — same 場=ば in different classification.",
       "real_world_context": "Business, social situations — '相手の立場に立って考える' (think from the other person's position).",
       "trap_note": "場=ば appears in both 訓訓 (立場) and 湯桶 (場所). The character's reading stays the same — it's always ば(kun). The classification changes because the partner character's reading type changes. Good demonstration that classification is about the pair, not the individual character.",
-      "chains": [],
+      "chains": [
+        "場",
+        "立"
+      ],
       "tags": []
     },
     {
@@ -2432,7 +2466,10 @@
       "difficulty_rationale": "Common word. Extends the 場=ば cross-reference chain: 立場(訓訓), 場所(湯桶), 職場(重箱).",
       "real_world_context": "Workplace — '職場環境を改善する' (improve the work environment). Daily use.",
       "trap_note": "場=ば now appears in three different classifications across the dataset: 立場(訓訓), 場所(湯桶), 職場(重箱). The character's reading is constant. Only the classification changes based on partner. This is the key insight the prediction chain drill should reinforce.",
-      "chains": [],
+      "chains": [
+        "場",
+        "職"
+      ],
       "tags": []
     },
     {
@@ -2480,7 +2517,10 @@
       "difficulty_rationale": "Fourth entry in the 場=ば chain. Now learners see the pattern clearly.",
       "real_world_context": "Food, travel — '本場のナポリピザ' (authentic Neapolitan pizza). '本場の味' (the real/original flavor).",
       "trap_note": "With 本棚(ほんだな) already in the dataset, 本場 extends the 本=ホン pattern too. Same first character, same reading, different second character. Both 重箱.",
-      "chains": [],
+      "chains": [
+        "本",
+        "場"
+      ],
       "tags": []
     },
     {
@@ -2680,7 +2720,9 @@
       "difficulty_rationale": "Clean example. Demonstrates the semantic heuristic: Sino-Japanese modifier (新=new) + native concrete noun (芽=sprout/bud).",
       "real_world_context": "Gardening, cooking (tea), seasonal language. '新芽が出てきた' (new buds are coming out).",
       "trap_note": "Cleanly illustrates the 重箱 semantic pattern: abstract Sino-Japanese adjective + concrete native noun. Compare: 新芽(しんめ, 重箱), 若葉(わかば, 訓訓). Both mean 'new growth' but 新 is on and 若 is kun.",
-      "chains": [],
+      "chains": [
+        "新"
+      ],
       "tags": []
     },
     {
@@ -2737,7 +2779,10 @@
       "difficulty_rationale": "Dual reading where classification changes. Extends the 毎X pattern from 毎朝. まいつき=重箱, まいげつ=音音.",
       "real_world_context": "Scheduling, finance — '毎月25日が給料日' (payday is the 25th of every month).",
       "trap_note": "The 毎X system is now well-populated: 毎朝(まいあさ, 重箱), 毎月(まいつき/まいげつ, 重箱 or 音音), 毎日(まいにち, 音音), 毎晩(まいばん, 音音), 毎年(まいとし/まいねん, 重箱 or 音音). Pattern: when the second character uses kun, it's 重箱. When on, it's 音音. 毎 itself is always マイ(on).",
-      "chains": [],
+      "chains": [
+        "毎",
+        "月"
+      ],
       "tags": []
     },
     {
@@ -2785,7 +2830,9 @@
       "difficulty_rationale": "Interesting combination: 茶 has only on readings (imported concept), 畑 has only kun readings (国字). They can ONLY form a 重箱 compound.",
       "real_world_context": "Travel (especially Shizuoka, Uji), food culture. '茶畑が広がっている.'",
       "trap_note": "When one character has only on readings and the other has only kun readings, the classification is forced. 茶(on only) + 畑(kun only) = 重箱 by necessity. This structural constraint is a genuinely useful prediction tool.",
-      "chains": [],
+      "chains": [
+        "茶"
+      ],
       "tags": []
     },
     {
@@ -2834,7 +2881,10 @@
       "difficulty_rationale": "Clean and common. Nice contrast with 見本(みほん, also 湯桶) — both have 本=ホン(on) as second element.",
       "real_world_context": "Calligraphy, education, business — 'お手本を見せてください' (please show me an example/model).",
       "trap_note": "手本 and 見本 are near-synonyms and both 湯桶. The pattern kun-noun + 本(ホン) is productive: 手本, 見本, 絵本(えほん). Good mini-pattern.",
-      "chains": [],
+      "chains": [
+        "手",
+        "本"
+      ],
       "tags": []
     },
     {
@@ -2881,7 +2931,9 @@
       "difficulty_rationale": "Common word. Extends the 手=て(kun) + on pattern: 手本, 手帳, 手数(てすう).",
       "real_world_context": "Stationery shops, organization — '手帳に書いておく' (write it down in my planner). Also 障害者手帳, お薬手帳 — official booklets.",
       "trap_note": "手 as the first element: 手本(てほん, 湯桶), 手帳(てちょう, 湯桶), 手紙(てがみ, 訓訓), 手間(てま, 訓訓). Same character, same reading, but classification depends entirely on the second character's reading type.",
-      "chains": [],
+      "chains": [
+        "手"
+      ],
       "tags": []
     },
     {
@@ -2932,7 +2984,10 @@
       "difficulty_rationale": "Third in the 手+on chain. Also extremely common in business (手数料).",
       "real_world_context": "Business/banking — '手数料がかかります' (a fee will be charged). 'お手数ですが' (sorry for the trouble, but...) — essential business phrase.",
       "trap_note": "お手数(おてすう/おてかず) in the polite phrase 'お手数ですが...' is ubiquitous in business email. Knowing the reading is essential for spoken professional Japanese.",
-      "chains": [],
+      "chains": [
+        "手",
+        "数"
+      ],
       "tags": []
     },
     {
@@ -3190,7 +3245,10 @@
       "difficulty_rationale": "Universal word, completely undecomposable. Dual reading with こんにち(音音) makes it a perfect teaching pair.",
       "real_world_context": "Daily life. '今日は何をする?' vs 'こんにちは' — different readings of the same kanji in universally common contexts.",
       "trap_note": "Part of the time-word 熟字訓 trio: 昨日(きのう), 今日(きょう), 明日(あした/あす). All have both 熟字訓 and regular 音音 readings (さくじつ, こんにち, みょうにち). The register split is consistent: 熟字訓 = casual, 音音 = formal.",
-      "chains": [],
+      "chains": [
+        "日",
+        "今"
+      ],
       "tags": []
     },
     {
@@ -3259,7 +3317,10 @@
       "difficulty_rationale": "Three readings — two 熟字訓, one 音音. Completes the time-word trio.",
       "real_world_context": "Daily life — 'また明日' (see you tomorrow). Business — '明日のミーティング' (tomorrow's meeting — あした or あす depending on formality).",
       "trap_note": "明日 has THREE standard readings with a register gradient: あした (casual) → あす (neutral/slightly formal) → みょうにち (formal/written). Only みょうにち is classifiable as 音音.",
-      "chains": [],
+      "chains": [
+        "日",
+        "明"
+      ],
       "tags": []
     },
     {
@@ -3367,7 +3428,9 @@
       "difficulty_rationale": "Completely undecomposable. Pairs with 玄人(くろうと). The しろ/くろ contrast suggests a folk etymology (white=amateur, black=pro) but the kanji don't support this.",
       "real_world_context": "Business, conversation — '素人にはわかりにくい' (hard for a layperson to understand). '素人考えですが...' (this may be a layperson's thinking, but...).",
       "trap_note": "The 素人/玄人 pair is a good teaching unit. Both are 熟字訓, both end in うと (not a reading of 人), and the しろ/くろ contrast creates a memorable mnemonic even though the etymology is debated.",
-      "chains": [],
+      "chains": [
+        "人"
+      ],
       "tags": []
     },
     {
@@ -3971,7 +4034,10 @@
       "difficulty_rationale": "Fifth entry in the 場=ば chain. At this point the pattern should be fully internalized.",
       "real_world_context": "Local government — '町役場' (town hall/office). Rural areas, administrative tasks.",
       "trap_note": "場=ば chain now has five entries across four classifications: 立場(訓訓), 場所(湯桶), 職場(重箱), 本場(重箱), 役場(重箱). The character is always ば. Classification is always determined by the partner.",
-      "chains": [],
+      "chains": [
+        "場",
+        "役"
+      ],
       "tags": []
     },
     {
@@ -4021,7 +4087,9 @@
       "difficulty_rationale": "Extends the verb-stem + noun pattern: 切手, 割箸, 焼鳥. Food vocabulary grounding.",
       "real_world_context": "Izakaya, street food — 焼鳥屋 is everywhere. Menu reading.",
       "trap_note": "The 焼+X pattern is productive in food vocabulary: 焼鳥, 焼肉(やきにく — note: 肉=ニク is on, making this 湯桶 not 訓訓), 焼魚(やきざかな, 訓訓). Good mini-set for showing how the same first element creates different classifications.",
-      "chains": [],
+      "chains": [
+        "焼"
+      ],
       "tags": []
     },
     {
@@ -4071,7 +4139,9 @@
       "difficulty_rationale": "Surprise classification. Most learners think of にく as 'just the word for meat' without registering it as an on reading. Pairs with 焼鳥(訓訓) to show same first element, different classification.",
       "real_world_context": "Restaurants — 焼肉屋 is a staple. Menu reading, restaurant discussions.",
       "trap_note": "焼鳥(やきとり, 訓訓) vs 焼肉(やきにく, 湯桶): same 焼=やき, different classification because 鳥=とり is kun while 肉=にく is on. Perfect drill pair for food vocabulary.",
-      "chains": [],
+      "chains": [
+        "焼"
+      ],
       "tags": []
     },
     {
@@ -4117,7 +4187,9 @@
       "difficulty_rationale": "毎X system entry. 晩 is on-only, so this can only be 音音.",
       "real_world_context": "Daily routine — '毎晩9時に寝る.'",
       "trap_note": "毎X system update: 毎日(まいにち, 音音), 毎晩(まいばん, 音音), 毎朝(まいあさ, 重箱), 毎月(まいつき/まいげつ, 重箱 or 音音), 毎年(まいとし/まいねん, 重箱 or 音音). The pattern is now clear: 毎 is always マイ(on). Classification depends entirely on whether the second character uses on or kun.",
-      "chains": [],
+      "chains": [
+        "毎"
+      ],
       "tags": []
     },
     {
@@ -4325,7 +4397,9 @@
       "difficulty_rationale": "Sixth entry in the 場=ば chain. Also corrects my own error in the analysis document — I initially second-guessed myself on this classification. 場面 is 湯桶, not 音音, because 場=ば is kun.",
       "real_world_context": "Film, theater, conversation — '印象的な場面' (impressive scene). Also business — '場面に応じて' (depending on the situation).",
       "trap_note": "I caught myself making the exact error this tool is designed to prevent: I temporarily thought 場面 might be 音音 because ば 'sounds' like it could be on. It's not — 場 on reading is ジョウ. This entry is calibration for the 'short common readings aren't automatically on' pattern.",
-      "chains": [],
+      "chains": [
+        "場"
+      ],
       "tags": []
     },
     {
@@ -5786,7 +5860,10 @@
       "difficulty_rationale": "Extends the 朝 chain. Colloquial/casual register. Both characters kun = 訓訓.",
       "real_world_context": "Casual conversation — '朝飯前' (easy/before breakfast). 'まだ朝飯食べてない' (haven't eaten breakfast yet).",
       "trap_note": "朝 chain: 朝刊(チョウカン, 音音), 毎朝(まいあさ — 朝=あさ, 重箱), 朝日(あさひ, 訓訓), 朝飯(あさめし, 訓訓). When 朝 means 'morning' in casual/native contexts → あさ(kun). When it appears in formal/Sino-Japanese compounds → チョウ(on). 朝食(ちょうしょく, 音音) vs 朝飯(あさめし, 訓訓) — same meaning, different register, different classification.",
-      "chains": [],
+      "chains": [
+        "朝",
+        "飯"
+      ],
       "tags": []
     },
     {
@@ -5836,7 +5913,10 @@
       "difficulty_rationale": "Register pair with 朝飯. Hotel/formal contexts use ちょうしょく. Casual contexts use あさめし/あさごはん.",
       "real_world_context": "Hotels — '朝食は何時からですか' (what time does breakfast start?). Formal dining situations.",
       "trap_note": "朝食(ちょうしょく, 音音, formal) vs 朝飯(あさめし, 訓訓, casual). The register-classification correlation is strong: formal Sino-Japanese → 音音, casual native Japanese → 訓訓. This pair makes the pattern explicit.",
-      "chains": [],
+      "chains": [
+        "朝",
+        "食"
+      ],
       "tags": []
     },
     {
@@ -5886,7 +5966,10 @@
       "difficulty_rationale": "Breaks the register-classification pattern. 夕食 LOOKS like it should be 音音 (parallel to 朝食) but isn't because 夕=ゆう is kun. The formality heuristic fails here.",
       "real_world_context": "Hotels, restaurants — '夕食は7時からです.' Same register as 朝食 but different classification.",
       "trap_note": "This is a critical heuristic-breaker. 朝食(ちょうしょく, 音音) and 夕食(ゆうしょく, 湯桶) are used in identical contexts and feel equally formal, but have different classifications because 朝=チョウ(on) while 夕=ゆう(kun). The learner who assumes 'formal = 音音' gets burned here. Classification requires checking each character, not guessing from register.",
-      "chains": [],
+      "chains": [
+        "夕",
+        "食"
+      ],
       "tags": []
     },
     {
@@ -5934,7 +6017,10 @@
       "difficulty_rationale": "Interesting: 夕飯 is less formal than 夕食 but 飯 uses its ON reading ハン, not kun めし. Register doesn't predict reading here either.",
       "real_world_context": "Home/casual — '夕飯何にする?' (what shall we have for dinner?). Family conversation.",
       "trap_note": "Meal compound matrix is now rich: 朝食(ちょうしょく, 音音), 朝飯(あさめし, 訓訓), 夕食(ゆうしょく, 湯桶), 夕飯(ゆうはん, 湯桶). 夕 is always ゆう(kun). But 飯 shifts: めし(kun) in casual 朝飯, ハン(on) in 夕飯 even though 夕飯 is also casual. The register-reading correlation is weaker than it first appears.",
-      "chains": [],
+      "chains": [
+        "夕",
+        "飯"
+      ],
       "tags": []
     },
     {
