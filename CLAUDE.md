@@ -21,11 +21,11 @@ The first user is Dan, and design decisions are made for his profile below. The
 app may later be offered to other N1+ learners. Therefore:
 **no path, storage key, identifier, or data shape may assume there is only one user.**
 Progress and state are keyed under a user identifier from the first line of
-persistence code, even
-while that identifier is a single locally generated value. Accounts, payments,
-sync, and multi-user storage are out of scope until Dan says otherwise — this rule
-exists so they are never foreclosed, not so they get built early. Do not add
-onboarding, accounts, or generic-audience scaffolding.
+persistence code, even while that identifier is a single locally generated
+value. Accounts, payments, sync, and multi-user storage are out of scope until
+Dan says otherwise — this rule exists so they are never foreclosed, not so they
+get built early. Do not add onboarding, accounts, or generic-audience
+scaffolding.
 
 ### The learner profile that drives design decisions
 
@@ -174,7 +174,8 @@ that honesty is part of the content.
 
 ### Phonetic change patterns
 
-- **連濁** (sequential voicing) — the largest cluster, roughly 30 entries.
+- **連濁** (sequential voicing) — the largest cluster, 24 entries carry the
+  token (audited 2026-09-06).
   はたけ → ばたけ in 茶畑.
 - **促音** (gemination) — final ク/ツ before カ/サ/タ行. 学校, 早速, 約款, 切手,
   物質.
@@ -209,10 +210,11 @@ rediscover them.
    (`juubako_57`, actually 音音), 夕暮れ (`yutou_24`, actually 訓訓), 台風
    (`juubako_25`, actually 音音). **Never infer classification from an ID.**
 
-2. **Cross-batch ID collisions are likely.** Batch numbering restarted between
-   files — batch 3 reached `juubako_86` while batch 4 begins at `juubako_25`.
-   Assume collisions until validation proves otherwise. `DATA_SPEC.md` specifies
-   reassigning canonical IDs and preserving originals as `source_id`.
+2. **Cross-batch ID collisions — checked, none.** The audit
+   (`reports/00-audit.md`, 2026-09-06) found all 168 IDs unique. Batch 3's highest
+   `juubako_` number is 24; `juubako_86` belonged to the discarded batch 5. Batch 4
+   begins at `juubako_25`. IDs remain unreliable (defect 1), so `DATA_SPEC.md`
+   still reassigns canonical IDs and preserves originals as `source_id`.
 
 3. **Phonetic-change vocabulary drift.** The verbose batches use English tokens
    (`"rendaku"`); the compact prototype uses Japanese (`"連濁"`). Normalize to

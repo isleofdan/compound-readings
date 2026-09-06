@@ -39,9 +39,9 @@ Recovery target:
 | File | Contents | Confidence |
 |---|---|---|
 | `compound_readings_data.json` | Batch 1, 30 entries — **RECOVERED** | [V] |
-| `compound_readings_batch2.json` | Batch 2, 50 entries | [T] |
-| `compound_readings_batch3.json` | Batch 3, 46 entries | [T] |
-| `compound_readings_batch4.json` | Batch 4, 49 entries (IDs described as "entries 127–175") | [T] |
+| `compound_readings_batch2.json` | Batch 2, 50 entries (confirmed by the audit, 2026-09-06) | [V] |
+| `compound_readings_batch3.json` | Batch 3, 46 entries (confirmed by the audit, 2026-09-06) | [V] |
+| `compound_readings_batch4.json` | Batch 4, 42 entries (its header string says "entries 127-175", written before generation; the file holds 42 — audited 2026-09-06) | [V] |
 | `compound_readings_index.md` | Cross-reference index | [T] |
 | `compound_readings_analysis.md` | Architecture + interaction model + honest assessment | [U] |
 | Prototype `.jsx` | Located and installed at `data/source/compound-drill.prototype.jsx`; 43 embedded compact entries (computed from the file, 2026-09-06), three modes | [V] |
@@ -49,7 +49,7 @@ Recovery target:
 **Index coverage — answered.** The index covers batches 1–3 only. Its own entry
 count table stops at Batch 3 and totals 126; it was written before batch 4
 existed, and batch 4's notes describe filling gaps the index identified. [T]
-Batch 4's 49 entries are therefore **not** represented in the chain maps or
+Batch 4's 42 entries are therefore **not** represented in the chain maps or
 coverage tables. Rebuilding the index from the consolidated dataset is a Phase 0
 deliverable, not an optional extra.
 
@@ -77,13 +77,18 @@ against the [T]/[U] claims in this document and in `CLAUDE.md`. Produce
 `reports/00-audit.md`. **Do not proceed until this is done and Dan has seen it.**
 
 Specifically confirm or refute:
-- Total across four batches ≈ 175 [T]
-- Batches 1–3 classification split: 音音 35, 訓訓 27, 重箱 20, 湯桶 21, 熟字訓 21,
-  irregular/3-char 2 — totalling 126 [T]. Batch 1's own split is confirmed [V]:
+- Total across four batches: 168 [V]. The ≈175 figure came from batch 4's header
+  string and is refuted by the audit (`reports/00-audit.md`).
+- Batches 1–3 classification split: 音音 38, 訓訓 32, 重箱 19, 湯桶 18, 熟字訓 18,
+  irregular 1 — totalling 126 [V]. The earlier figures (35 / 27 / 20 / 21 / 21 / 2)
+  were refuted by the audit. Batch 1's own split is confirmed [V]:
   音音 7, 訓訓 7, 重箱 8, 湯桶 6, 熟字訓 2 = 30, matching the index table exactly.
 - Presence of `alternate_readings[]` on some but not all verbose entries [T]
-- Cross-batch ID collisions (batch 3 reached `juubako_86`; batch 4 opens at
-  `juubako_25`) [T]
+- Cross-batch ID collisions: none — all 168 IDs are unique [V]. Batch 3's highest
+  `juubako_` number is 24; `juubako_86` was the truncation point of the discarded
+  batch 5, not a batch 3 ID. Batch 4 does open at `juubako_25` [V]. Canonical IDs
+  are still reassigned (`DATA_SPEC.md` §4.3) because 45 of 168 ID prefixes
+  contradict the entry's classification.
 
 **0.2 — Repo scaffold.** Vite + React + TypeScript, Tailwind, Vitest, the
 directory layout in `CLAUDE.md` §8, GitHub Actions workflow for Pages. Get a
@@ -263,8 +268,8 @@ to direct the next session, not to be a scoreboard. See `CLAUDE.md` §3.5.
 
 One paragraph each. Do not build these without a fresh conversation with Dan.
 
-**Dataset expansion tooling.** 重箱 is underrepresented relative to 音音 [T:
-20 vs 35 across batches 1–3]. Fixing that means generating entries, which is
+**Dataset expansion tooling.** 重箱 is underrepresented relative to 音音 [V:
+25 vs 53 across all four batches; 19 vs 38 in batches 1–3]. Fixing that means generating entries, which is
 what broke down in chat — batch 5 died to context degradation and schema drift
 went uncaught between batches. The right shape is a tool problem, not a
 generation problem: a template-driven entry scaffold plus the existing validator

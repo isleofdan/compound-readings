@@ -298,6 +298,11 @@ normalize to the ASCII code below.
 | `vowel_change` | 母音変化 | Vowel alternation not covered above | — |
 | `other` | その他 | Anything else; `phonetic_change_detail` required | — |
 
+Spellings actually present in the source files (audited 2026-09-06): the verbose
+batches use `rendaku`, `sokuon` and `other` (the four 半濁音化 entries are filed
+under `other`); the prototype uses `連濁`, `促音` and `半濁音`. `半濁音` maps to
+`handakuon`.
+
 `phonetic_changes` is an array — an entry may undergo more than one. Empty array
 means no change, and that assertion is checkable (§7.5).
 
