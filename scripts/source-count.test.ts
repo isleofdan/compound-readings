@@ -10,7 +10,7 @@ describe("source batch files", () => {
     expect(parsed.entries.length).toBeGreaterThan(0);
   });
 
-  it("entry total equals the build-time count shown on the hello page", () => {
+  it("entry total equals an independent recount of the files", () => {
     // Independent recount, then compared with the helper the build uses.
     let independentTotal = 0;
     for (const file of SOURCE_FILES) {

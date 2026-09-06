@@ -13,31 +13,13 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { DatasetSchema, type Entry } from "../src/data/schema";
+import type { CompactEntry, CompactFile } from "../src/data/compact";
+
+export type { CompactEntry, CompactFile } from "../src/data/compact";
 
 const ROOT = process.cwd();
 const DATA = join(ROOT, "data", "compounds.json");
 export const COMPACT_PATH = join(ROOT, "data", "generated", "compounds.compact.json");
-
-export type CompactChar = { k: string; r: string | null; t: Entry["characters"][number]["reading_type"]; on: string[]; kun: string[]; note: string | null };
-export type CompactAlternate = { reading: string; cls: Entry["classification"]; status: Entry["alternate_readings"][number]["status"]; context: string };
-export type CompactEntry = {
-  id: string;
-  compound: string;
-  reading: string;
-  chars: CompactChar[];
-  cls: Entry["classification"];
-  diff: number;
-  changes: Entry["phonetic_changes"];
-  changeDetail: string | null;
-  context: string;
-  trap: string | null;
-  chains: string[];
-  alternates: CompactAlternate[];
-  contested: boolean;
-  contestedNote: string | null;
-  tags: string[];
-};
-export type CompactFile = { $generated: true; $schema_version: string; $warning: string; entries: CompactEntry[] };
 
 export function toCompact(e: Entry): CompactEntry {
   return {

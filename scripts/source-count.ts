@@ -1,6 +1,6 @@
-// Counts the entries in the four source batch files. This is the ONE place the
-// source-entry count is computed. The hello page shows it (injected at build time
-// by vite.config.ts) and the Vitest test checks it, so the two cannot drift apart.
+// Names the four source batch files and counts their entries. This is the ONE
+// place the source-entry count is computed; the consolidator reads the file
+// list from here and the Vitest test checks the count against the files.
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 

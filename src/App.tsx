@@ -1,9 +1,184 @@
-export default function App() {
+import { useMemo, useState } from "react";
+import type { CompactEntry } from "./data/compact";
+import { CLASSIFICATION_LABELS, CLASSIFICATION_ORDER, PHONETIC_CHANGE_LABELS, PHONETIC_CHANGE_ORDER, READING_TYPE_LABELS } from "./data/labels";
+import { ENTRIES, classificationCounts, imbalanceSentence, matchesSearch } from "./data/load";
+import type { Classification, PhoneticChange } from "./data/schema";
+
+// Phase 0 Android checkpoint: a single-screen data-inspection view. State lives
+// in memory only — no localStorage, nothing leaves the device (Phase 2 owns
+// persistence). No drills.
+
+const CLS_STYLE: Record<Classification, string> = {
+  on_on: "bg-emerald-700 text-white",
+  kun_kun: "bg-amber-800 text-white",
+  juubako: "bg-indigo-700 text-white",
+  yutou: "bg-fuchsia-800 text-white",
+  jukujikun: "bg-yellow-700 text-white",
+};
+
+function Badge({ cls, small = false }: { cls: Classification; small?: boolean }) {
   return (
-    <main className="mx-auto max-w-md px-5 py-10 text-lg leading-relaxed text-neutral-900">
-      <h1 className="text-3xl font-bold">複合語の読み</h1>
-      <p className="mt-4">Compound Readings — hello</p>
-      <p className="mt-2 text-neutral-600">{__SOURCE_ENTRY_COUNT__} source entries</p>
+    <span className={`inline-block rounded-full font-semibold ${CLS_STYLE[cls]} ${small ? "px-2 py-0.5 text-xs" : "px-2.5 py-0.5 text-sm"}`}>
+      {CLASSIFICATION_LABELS[cls]}
+    </span>
+  );
+}
+
+function Chip({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-pressed={active}
+      className={`min-h-9 rounded-full border px-3 py-1 text-sm ${active ? "border-neutral-900 bg-neutral-900 text-white" : "border-neutral-400 bg-white text-neutral-800"}`}
+    >
+      {children}
+    </button>
+  );
+}
+
+function EntryRow({ e, open, onToggle }: { e: CompactEntry; open: boolean; onToggle: () => void }) {
+  const unclassifiable = e.tags.includes("unclassifiable");
+  return (
+    <li className="border-b border-neutral-200">
+      <button type="button" onClick={onToggle} aria-expanded={open} className="flex w-full items-center gap-3 px-1 py-3 text-left">
+        <span className="text-2xl font-bold tracking-wider">{e.compound}</span>
+        <span className="text-base text-neutral-700">{e.reading}</span>
+        <span className="ml-auto flex items-center gap-1.5">
+          {unclassifiable && <span className="rounded bg-red-700 px-1.5 py-0.5 text-xs font-bold text-white">unclassifiable</span>}
+          <Badge cls={e.cls} />
+        </span>
+      </button>
+      {open && (
+        <div className="space-y-3 px-1 pb-4 text-sm">
+          {unclassifiable && (
+            <p className="rounded border-2 border-red-700 bg-red-50 px-2 py-1 font-semibold text-red-900">
+              Tagged unclassifiable — classification is the closest fit, for Dan to rule on.
+            </p>
+          )}
+          <div className="flex flex-wrap gap-2">
+            {e.chars.map((c, i) => (
+              <div key={i} className="min-w-20 rounded-lg bg-neutral-100 px-3 py-2 text-center">
+                <div className="text-xl">{c.k}</div>
+                <div className="text-neutral-800">{c.r ?? "—"}</div>
+                <div className={`text-xs font-bold ${c.t === "on" ? "text-emerald-800" : c.t === "kun" ? "text-amber-900" : "text-neutral-500"}`}>{READING_TYPE_LABELS[c.t]}</div>
+                <div className="mt-1 text-xs text-neutral-600">音 {c.on.join("・") || "—"}</div>
+                <div className="text-xs text-neutral-600">訓 {c.kun.join("・") || "—"}</div>
+              </div>
+            ))}
+          </div>
+          {e.chars.some((c) => c.note) && (
+            <ul className="list-disc space-y-1 pl-5 text-neutral-800">
+              {e.chars.filter((c) => c.note).map((c, i) => (
+                <li key={i}>
+                  <span className="font-semibold">{c.k}</span> {c.note}
+                </li>
+              ))}
+            </ul>
+          )}
+          <p>
+            <span className="font-semibold">Phonetic changes:</span> {e.changes.length ? e.changes.map((p) => PHONETIC_CHANGE_LABELS[p]).join(", ") : "none"}
+            {e.changeDetail && <span className="text-neutral-700"> — {e.changeDetail}</span>}
+          </p>
+          {e.alternates.length > 0 && (
+            <div>
+              <div className="font-semibold">Alternate readings</div>
+              <ul className="space-y-1">
+                {e.alternates.map((a, i) => (
+                  <li key={i} className="flex flex-wrap items-center gap-1.5">
+                    <span className="text-base">{a.reading}</span>
+                    <Badge cls={a.cls} small />
+                    <code className="rounded bg-neutral-100 px-1 text-xs">{a.status}</code>
+                    <span className="w-full text-neutral-700">{a.context}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {e.contested && (
+            <p className="rounded border-l-4 border-orange-600 bg-orange-50 px-2 py-1">
+              <span className="font-semibold">Contested:</span> {e.contestedNote}
+            </p>
+          )}
+          <p>
+            <span className="font-semibold">Context:</span> {e.context}
+          </p>
+          {e.trap && (
+            <p className="rounded border-l-4 border-yellow-600 bg-yellow-50 px-2 py-1">
+              <span className="font-semibold">Trap:</span> {e.trap}
+            </p>
+          )}
+          <p className="text-neutral-700">
+            <span className="font-semibold text-neutral-900">Tags:</span> {e.tags.length ? e.tags.join(", ") : "none"} ·{" "}
+            <span className="font-semibold text-neutral-900">Chains:</span> {e.chains.length ? e.chains.join(" ") : "none"} ·{" "}
+            <span className="font-semibold text-neutral-900">Difficulty:</span> {e.diff} · <span className="text-neutral-500">{e.id}</span>
+          </p>
+        </div>
+      )}
+    </li>
+  );
+}
+
+export default function App() {
+  const [query, setQuery] = useState("");
+  const [cls, setCls] = useState<Classification | null>(null);
+  const [change, setChange] = useState<PhoneticChange | null>(null);
+  const [openId, setOpenId] = useState<string | null>(null);
+
+  const counts = useMemo(() => classificationCounts(), []);
+  const visible = useMemo(
+    () => ENTRIES.filter((e) => matchesSearch(e, query) && (cls === null || e.cls === cls) && (change === null || e.changes.includes(change))),
+    [query, cls, change],
+  );
+
+  return (
+    <main className="mx-auto max-w-md px-3 pb-24 text-neutral-900">
+      <header className="pt-4">
+        <h1 className="text-xl font-bold">複合語の読み — data inspection</h1>
+        <p className="mt-1 text-sm">
+          <span className="font-semibold">{ENTRIES.length} entries</span> ·{" "}
+          {CLASSIFICATION_ORDER.map((c) => `${CLASSIFICATION_LABELS[c]} ${counts[c]}`).join(" · ")}
+        </p>
+        <p className="mt-1 text-sm text-neutral-700">{imbalanceSentence()}</p>
+      </header>
+
+      <div className="sticky top-0 z-10 -mx-3 bg-white px-3 py-2 shadow-sm">
+        <label className="block">
+          <span className="sr-only">Search by character</span>
+          <input
+            type="search"
+            inputMode="text"
+            value={query}
+            onChange={(ev) => setQuery(ev.target.value)}
+            placeholder="Type a kanji, e.g. 場"
+            className="min-h-11 w-full rounded-lg border border-neutral-400 px-3 text-lg"
+          />
+        </label>
+        <div className="mt-2 flex flex-wrap gap-1.5">
+          {CLASSIFICATION_ORDER.map((c) => (
+            <Chip key={c} active={cls === c} onClick={() => setCls(cls === c ? null : c)}>
+              {CLASSIFICATION_LABELS[c]}
+            </Chip>
+          ))}
+        </div>
+        <div className="mt-1.5 flex flex-wrap gap-1.5">
+          {PHONETIC_CHANGE_ORDER.map((p) => (
+            <Chip key={p} active={change === p} onClick={() => setChange(change === p ? null : p)}>
+              {PHONETIC_CHANGE_LABELS[p]}
+            </Chip>
+          ))}
+        </div>
+        <p className="mt-1.5 text-xs text-neutral-600">
+          {visible.length} of {ENTRIES.length} shown
+        </p>
+      </div>
+
+      <ul>
+        {visible.map((e) => (
+          <EntryRow key={e.id} e={e} open={openId === e.id} onToggle={() => setOpenId(openId === e.id ? null : e.id)} />
+        ))}
+      </ul>
+      {visible.length === 0 && <p className="py-6 text-center text-neutral-600">No entry matches.</p>}
     </main>
   );
 }
